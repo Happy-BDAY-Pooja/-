@@ -1,0 +1,1251 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=5.0" />
+  <title>Happy Birthday, Pooja Miss 🌸</title>
+  <!-- Tailwind CSS -->
+  <script src="https://cdn.tailwindcss.com"></script>
+  <!-- Google Fonts -->
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+  <link href="https://fonts.googleapis.com/css2?family=Anton&family=Caveat:wght@600;700&family=Dancing+Script:wght@600;700&family=Fredoka:wght@500;600;700&family=Oswald:wght@700&family=Quicksand:wght@600;700&family=Sacramento&display=swap" rel="stylesheet">
+  <!-- Tone.js for subtle cute sound effects -->
+  <script src="https://cdnjs.cloudflare.com/ajax/libs/tone/14.8.49/Tone.js"></script>
+
+  <style>
+    :root {
+      --cream-bg: #f6f2ea;
+      --grid-line: rgba(175, 155, 145, 0.27);
+      --maroon-dark: #7a2342;
+      --maroon-mid: #8e3554;
+      --rose-btn: #b85d79;
+      --blush-light: #f6dce4;
+    }
+
+    * {
+      box-sizing: border-box;
+      user-select: none;
+      -webkit-tap-highlight-color: transparent;
+    }
+
+    input, textarea, .letter-scroll {
+      user-select: text;
+    }
+
+    body, html {
+      margin: 0;
+      padding: 0;
+      width: 100%;
+      height: 100%;
+      overflow: hidden;
+      background-color: #f6f2ea;
+      font-family: 'Quicksand', sans-serif;
+    }
+
+    .stage-wrapper {
+      width: 100vw;
+      height: 100vh;
+      height: 100dvh;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      position: relative;
+      overflow: hidden;
+    }
+
+    .canva-stage {
+      width: 100%;
+      height: 100%;
+      position: relative;
+      overflow: hidden;
+      background-color: var(--cream-bg);
+      background-image:
+        linear-gradient(to right, var(--grid-line) 1px, transparent 1px),
+        linear-gradient(to bottom, var(--grid-line) 1px, transparent 1px);
+      background-size: 40px 40px;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      transition: background 0.6s ease;
+    }
+
+    /* Soft blush-rose backdrop for the Page 9 Closing Finale */
+    .canva-stage.closing-bg {
+      background-color: #f4dde5;
+      background-image:
+        radial-gradient(circle at 20% 20%, rgba(255, 255, 255, 0.72) 0%, transparent 45%),
+        radial-gradient(circle at 80% 80%, rgba(212, 116, 145, 0.22) 0%, transparent 50%),
+        linear-gradient(to right, rgba(175, 130, 145, 0.16) 1px, transparent 1px),
+        linear-gradient(to bottom, rgba(175, 130, 145, 0.16) 1px, transparent 1px);
+      background-size: 100% 100%, 100% 100%, 40px 40px, 40px 40px;
+    }
+
+    /* Typography helpers */
+    .font-impact {
+      font-family: 'Oswald', 'Anton', sans-serif;
+      letter-spacing: 0.02em;
+    }
+    .font-brush {
+      font-family: 'Dancing Script', 'Caveat', cursive;
+    }
+    .font-whisper {
+      font-family: 'Sacramento', cursive;
+    }
+    .font-pill {
+      font-family: 'Fredoka', sans-serif;
+    }
+
+    /* Pill buttons */
+    .canva-pill-btn {
+      background-color: var(--rose-btn);
+      color: #ffffff;
+      font-family: 'Fredoka', sans-serif;
+      font-weight: 600;
+      border: 3px solid var(--maroon-dark);
+      border-radius: 9999px;
+      box-shadow: 0 5px 0 var(--maroon-dark), 0 8px 15px rgba(122, 35, 66, 0.25);
+      transition: all 0.2s cubic-bezier(0.34, 1.56, 0.64, 1);
+      cursor: pointer;
+      display: inline-flex;
+      align-items: center;
+      justify-content: center;
+      position: relative;
+      overflow: hidden;
+    }
+    .canva-pill-btn:hover {
+      transform: translateY(-3px) scale(1.04);
+      box-shadow: 0 8px 0 var(--maroon-dark), 0 12px 20px rgba(122, 35, 66, 0.32);
+      background-color: #c46683;
+    }
+    .canva-pill-btn:active {
+      transform: translateY(3px) scale(0.98);
+      box-shadow: 0 2px 0 var(--maroon-dark);
+    }
+
+    /* Page container transitions */
+    .page-slide {
+      position: absolute;
+      inset: 0;
+      width: 100%;
+      height: 100%;
+      display: flex;
+      flex-direction: column;
+      align-items: center;
+      justify-content: center;
+      opacity: 0;
+      pointer-events: none;
+      transform: scale(0.96) translateY(10px);
+      transition: opacity 0.45s ease, transform 0.45s cubic-bezier(0.22, 1, 0.36, 1);
+      z-index: 10;
+      padding: 3.5rem 1.25rem 3.5rem;
+      overflow-y: auto;
+    }
+    .page-slide.active {
+      opacity: 1;
+      pointer-events: auto;
+      transform: scale(1) translateY(0);
+    }
+
+    /* Keyframe Animations */
+    @keyframes floatBob {
+      0%, 100% { transform: translateY(0px) rotate(0deg); }
+      50% { transform: translateY(-10px) rotate(2deg); }
+    }
+    @keyframes happyBounce {
+      0%, 100% { transform: translateY(0) scale(1); }
+      40% { transform: translateY(-14px) scale(1.03, 0.97); }
+      60% { transform: translateY(-6px) scale(0.99, 1.02); }
+    }
+    @keyframes angryShake {
+      0%, 100% { transform: translateX(0) rotate(0deg); }
+      20% { transform: translateX(-5px) rotate(-2deg); }
+      40% { transform: translateX(5px) rotate(2deg); }
+      60% { transform: translateX(-4px) rotate(-1deg); }
+      80% { transform: translateX(4px) rotate(1deg); }
+    }
+    @keyframes giftWobble {
+      0%, 100% { transform: rotate(0deg) scale(1); }
+      15% { transform: rotate(-7deg) scale(1.05); }
+      30% { transform: rotate(7deg) scale(1.06); }
+      45% { transform: rotate(-5deg) scale(1.04); }
+      60% { transform: rotate(5deg) scale(1.04); }
+      75% { transform: rotate(-2deg) scale(1.02); }
+    }
+    @keyframes candleFlicker {
+      0%, 100% { transform: scale(1) rotate(-2deg); opacity: 0.95; }
+      50% { transform: scale(1.15, 0.9) rotate(3deg); opacity: 1; }
+    }
+    @keyframes letterEmerge {
+      0% { transform: translateY(38px) scale(0.97); opacity: 0; }
+      100% { transform: translateY(0) scale(1); opacity: 1; }
+    }
+    @keyframes popInCard {
+      0% { transform: scale(0.84) translateY(20px); opacity: 0; }
+      100% { transform: scale(1) translateY(0); opacity: 1; }
+    }
+    @keyframes pulseSparkle {
+      0%, 100% { transform: scale(1) translateY(0); }
+      50% { transform: scale(1.18) translateY(-5px); }
+    }
+    @keyframes twinkle {
+      0%, 100% { opacity: 0.45; transform: scale(0.9) rotate(0deg); }
+      50% { opacity: 1; transform: scale(1.15) rotate(12deg); }
+    }
+    @keyframes blinkCursor {
+      0%, 100% { opacity: 1; }
+      50% { opacity: 0; }
+    }
+    @keyframes quoteFade {
+      0% { opacity: 0; transform: translateY(8px); }
+      100% { opacity: 1; transform: translateY(0); }
+    }
+
+    .anim-bob { animation: floatBob 3.2s ease-in-out infinite; }
+    .anim-happy { animation: happyBounce 2s ease-in-out infinite; }
+    .anim-angry { animation: angryShake 0.6s ease-in-out infinite; }
+    .anim-wobble { animation: giftWobble 2.2s ease-in-out infinite; }
+    .anim-candle { animation: candleFlicker 0.8s ease-in-out infinite; transform-origin: bottom center; }
+    .anim-pulse { animation: pulseSparkle 1.8s ease-in-out infinite; }
+    .anim-twinkle { animation: twinkle 2.4s ease-in-out infinite; }
+    .anim-pop-in { animation: popInCard 0.42s cubic-bezier(0.22, 1, 0.36, 1) forwards; }
+    .anim-quote-fade { animation: quoteFade 0.38s ease forwards; }
+
+    .page-slide.active .anim-letter-emerge {
+      animation: letterEmerge 0.65s cubic-bezier(0.22, 1, 0.36, 1) forwards;
+    }
+
+    /* Typewriter cursor */
+    .typewriter-cursor {
+      display: inline-block;
+      width: 2.5px;
+      height: 1.1em;
+      background-color: #7a2342;
+      margin-left: 2px;
+      vertical-align: -2px;
+      animation: blinkCursor 0.75s step-end infinite;
+    }
+
+    /* Stationery Letter Card on Page 6 */
+    .stationery-letter {
+      background-color: #fffef9;
+      background-image:
+        radial-gradient(rgba(184, 93, 121, 0.04) 1px, transparent 1px),
+        repeating-linear-gradient(
+          transparent,
+          transparent 27px,
+          rgba(195, 165, 178, 0.28) 27px,
+          rgba(195, 165, 178, 0.28) 28px
+        );
+      background-size: 18px 18px, 100% 28px;
+      box-shadow: 0 14px 34px rgba(100, 35, 58, 0.18), 0 2px 8px rgba(100, 35, 58, 0.08);
+    }
+
+    /* Closing Card on Page 9 */
+    .closing-card {
+      background: linear-gradient(180deg, #fffdf9 0%, #fff7fa 100%);
+      box-shadow: 0 20px 45px rgba(122, 35, 66, 0.16), 0 0 0 6px rgba(244, 194, 210, 0.45);
+    }
+
+    /* Custom subtle pink scrollbar for the letter */
+    .letter-scroll::-webkit-scrollbar {
+      width: 6px;
+    }
+    .letter-scroll::-webkit-scrollbar-track {
+      background: rgba(244, 194, 210, 0.25);
+      border-radius: 999px;
+    }
+    .letter-scroll::-webkit-scrollbar-thumb {
+      background: rgba(184, 93, 121, 0.6);
+      border-radius: 999px;
+    }
+    .letter-scroll::-webkit-scrollbar-thumb:hover {
+      background: #7a2342;
+    }
+
+    /* Floating click particle */
+    .click-particle {
+      position: fixed;
+      pointer-events: none;
+      z-index: 9999;
+      animation: flyUpFade 1s ease-out forwards;
+    }
+    @keyframes flyUpFade {
+      0% { transform: translate(-50%, -50%) scale(0.5); opacity: 1; }
+      100% { transform: translate(-50%, -115px) scale(1.25) rotate(14deg); opacity: 0; }
+    }
+  </style>
+</head>
+<body>
+
+  <div class="stage-wrapper" id="appStageWrapper">
+    <div class="canva-stage" id="canvaStage">
+
+      <!-- =========================================================
+           DECORATIVE CORNER WAVES
+           ========================================================= -->
+      <div id="gridCornerWaves" class="pointer-events-none absolute inset-0 overflow-hidden z-0 transition-opacity duration-500">
+        <!-- Top-Left Maroon/Rose Double Wave -->
+        <svg class="absolute -top-2 -left-2 w-40 sm:w-64 md:w-80 h-auto" viewBox="0 0 320 240" fill="none">
+          <path d="M0 0H300C265 45 215 40 175 75C130 115 135 165 85 195C45 220 15 218 0 230V0Z" fill="#b85d79" opacity="0.45"/>
+          <path d="M0 0H265C230 35 185 32 148 68C108 105 110 150 65 178C32 198 10 198 0 208V0Z" fill="#7a2342"/>
+        </svg>
+
+        <!-- Bottom-Right Maroon/Rose Wave -->
+        <svg class="absolute -bottom-2 -right-2 w-44 sm:w-72 md:w-96 h-auto" viewBox="0 0 360 240" fill="none">
+          <path d="M360 240H0C42 195 95 205 148 162C202 118 205 68 265 36C308 14 340 15 360 0V240Z" fill="#b85d79" opacity="0.5"/>
+          <path d="M360 240H45C85 202 132 208 180 170C228 132 232 85 285 56C322 36 345 35 360 22V240Z" fill="#8e3554"/>
+        </svg>
+
+        <!-- Subtle Sketched Line-Art Corner Flowers (Visible on Pages 5, 6, 8, 9) -->
+        <svg id="cornerSketchFlowers" class="absolute bottom-2 right-4 w-32 sm:w-48 h-auto opacity-0 transition-opacity duration-500" viewBox="0 0 220 150" fill="none">
+          <g stroke="#2d2226" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round" fill="#f6f2ea">
+            <path d="M75 110 C55 92, 42 108, 55 125 C40 132, 52 148, 72 136 C78 150, 96 146, 92 128 C110 128, 108 108, 90 108 C94 90, 76 88, 75 110 Z"/>
+            <circle cx="76" cy="120" r="8" fill="#e8c8d2"/>
+            <path d="M148 78 C128 52, 108 72, 125 95 C102 102, 112 128, 138 118 C142 142, 170 138, 168 112 C194 115, 195 88, 170 85 C180 62, 152 55, 148 78 Z"/>
+            <circle cx="150" cy="96" r="11" fill="#e8c8d2"/>
+            <path d="M145 94 C148 91, 153 91, 155 95"/>
+            <path d="M108 95 C92 78, 102 62, 118 75 C115 84, 112 90, 108 95 Z" fill="#e6e1d6"/>
+            <path d="M180 78 C195 62, 212 72, 198 88 C190 86, 185 82, 180 78 Z" fill="#e6e1d6"/>
+          </g>
+        </svg>
+      </div>
+
+      <!-- =========================================================
+           TOP BAR: Audio Toggle & Customize Button
+           ========================================================= -->
+      <div class="absolute top-3 right-3 sm:top-4 sm:right-5 z-50 flex items-center gap-2">
+        <button id="soundToggleBtn" onclick="toggleSound()" class="px-3 py-1.5 rounded-full bg-white/80 hover:bg-white text-[#7a2342] border border-[#7a2342]/20 shadow-sm text-xs sm:text-sm font-semibold flex items-center gap-1.5 backdrop-blur-sm transition">
+          <span id="soundIcon">🔊</span>
+          <span class="hidden sm:inline">SFX</span>
+        </button>
+        <button onclick="openCustomizeModal()" class="px-3.5 py-1.5 rounded-full bg-[#7a2342] hover:bg-[#942c51] text-white shadow-md text-xs sm:text-sm font-semibold flex items-center gap-1.5 transition">
+          <span>✨ Customize Text</span>
+        </button>
+      </div>
+
+      <!-- =========================================================
+           PAGE 1: INTRO SCREEN ("HEY!! I made something for you")
+           ========================================================= -->
+      <section id="page-1" class="page-slide active">
+        <div class="max-w-4xl w-full flex flex-col md:flex-row items-center justify-center gap-5 md:gap-12 px-4">
+
+          <!-- Left Text & Yes/No Stack -->
+          <div class="flex flex-col items-center text-center order-2 md:order-1">
+            <h1 id="display-p1-hey" class="font-impact text-6xl sm:text-7xl md:text-8xl text-[#7a2342] tracking-wide leading-none mb-2 drop-shadow-sm">
+              HEY!!
+            </h1>
+            <p id="display-p1-sub1" class="font-brush text-2xl sm:text-3xl md:text-4xl text-[#23191c] font-bold mb-1">
+              I made something for you, Pooja Miss
+            </p>
+            <p id="display-p1-sub2" class="font-whisper text-4xl sm:text-5xl md:text-6xl text-[#8e3554] -mt-1 mb-6">
+              Do you want to see?
+            </p>
+
+            <div class="flex items-center gap-5 sm:gap-7">
+              <button onclick="goToPage(3)" class="canva-pill-btn text-2xl sm:text-3xl px-9 sm:px-11 py-2.5 sm:py-3">
+                Yes
+              </button>
+              <button onclick="goToPage(2)" class="canva-pill-btn text-2xl sm:text-3xl px-10 sm:px-12 py-2.5 sm:py-3">
+                No
+              </button>
+            </div>
+          </div>
+
+          <!-- Right Cute Chubby White Cat Sticker -->
+          <div class="order-1 md:order-2 anim-bob">
+            <svg class="w-44 h-44 sm:w-60 sm:h-60 md:w-72 md:h-72 drop-shadow-xl" viewBox="0 0 260 260">
+              <defs>
+                <radialGradient id="catFur1" cx="50%" cy="45%" r="52%">
+                  <stop offset="0%" stop-color="#ffffff"/>
+                  <stop offset="75%" stop-color="#f7f2ee"/>
+                  <stop offset="100%" stop-color="#e3dad2"/>
+                </radialGradient>
+                <radialGradient id="pinkBlush" cx="50%" cy="50%" r="50%">
+                  <stop offset="0%" stop-color="#f48fb1" stop-opacity="0.65"/>
+                  <stop offset="100%" stop-color="#f48fb1" stop-opacity="0"/>
+                </radialGradient>
+              </defs>
+              <path d="M52 95 L36 35 L98 62 Z" fill="#dcd2c8" stroke="#cbbeb2" stroke-width="2" stroke-linejoin="round"/>
+              <path d="M56 88 L45 46 L88 65 Z" fill="#f2bac9"/>
+              <path d="M208 95 L224 35 L162 62 Z" fill="#dcd2c8" stroke="#cbbeb2" stroke-width="2" stroke-linejoin="round"/>
+              <path d="M204 88 L215 46 L172 65 Z" fill="#f2bac9"/>
+              <path d="M68 185 C58 215, 70 242, 130 242 C190 242, 202 215, 192 185 Z" fill="url(#catFur1)" stroke="#d8cec5" stroke-width="2"/>
+              <ellipse cx="130" cy="135" rx="85" ry="72" fill="url(#catFur1)" stroke="#d8cec5" stroke-width="2"/>
+              <ellipse cx="75" cy="148" rx="22" ry="15" fill="url(#pinkBlush)"/>
+              <ellipse cx="185" cy="148" rx="22" ry="15" fill="url(#pinkBlush)"/>
+              <g>
+                <ellipse cx="95" cy="128" rx="13.5" ry="14.5" fill="#231815"/>
+                <circle cx="90" cy="122" r="4.5" fill="#ffffff"/>
+                <circle cx="99" cy="133" r="2" fill="#ffffff"/>
+                <ellipse cx="165" cy="128" rx="13.5" ry="14.5" fill="#231815"/>
+                <circle cx="160" cy="122" r="4.5" fill="#ffffff"/>
+                <circle cx="169" cy="133" r="2" fill="#ffffff"/>
+              </g>
+              <polygon points="125,140 135,140 130,147" fill="#eca1b5"/>
+              <path d="M120 153 Q125 158 130 151 Q135 158 140 153" stroke="#594943" stroke-width="2.5" fill="none" stroke-linecap="round"/>
+              <g stroke="#b8aba0" stroke-width="1.8" stroke-linecap="round">
+                <line x1="35" y1="138" x2="65" y2="142"/>
+                <line x1="32" y1="148" x2="64" y2="149"/>
+                <line x1="225" y1="138" x2="195" y2="142"/>
+                <line x1="228" y1="148" x2="196" y2="149"/>
+              </g>
+              <ellipse cx="102" cy="232" rx="16" ry="11" fill="#ffffff" stroke="#d8cec5" stroke-width="2"/>
+              <ellipse cx="158" cy="232" rx="16" ry="11" fill="#ffffff" stroke="#d8cec5" stroke-width="2"/>
+              <g transform="translate(175, 58) rotate(18)">
+                <path d="M0 0 C-22 -18, -28 14, -4 8 C-14 22, -6 32, 2 12 Z" fill="#f7a8c4" stroke="#d97a9c" stroke-width="1.5"/>
+                <path d="M6 0 C28 -18, 34 14, 10 8 C20 22, 12 32, 4 12 Z" fill="#f7a8c4" stroke="#d97a9c" stroke-width="1.5"/>
+                <g fill="#fce4ec" stroke="#e58ca8" stroke-width="1.5">
+                  <circle cx="3" cy="-9" r="7"/>
+                  <circle cx="12" cy="-2" r="7"/>
+                  <circle cx="8" cy="9" r="7"/>
+                  <circle cx="-3" cy="9" r="7"/>
+                  <circle cx="-6" cy="-2" r="7"/>
+                </g>
+                <circle cx="3" cy="1" r="4.5" fill="#f5c242"/>
+              </g>
+            </svg>
+          </div>
+
+        </div>
+      </section>
+
+      <!-- =========================================================
+           PAGE 2: "NO" BRANCH — ANGRY CAT ("HOW DARE YOU")
+           ========================================================= -->
+      <section id="page-2" class="page-slide">
+        <div class="flex flex-col items-center text-center max-w-xl mx-auto">
+
+          <div class="anim-angry mb-2">
+            <svg class="w-44 h-44 sm:w-56 sm:h-56 drop-shadow-xl" viewBox="0 0 240 240">
+              <path d="M48 92 L35 28 L96 58 Z" fill="#8c6246" stroke="#593a25" stroke-width="2.5" stroke-linejoin="round"/>
+              <path d="M55 84 L46 42 L85 62 Z" fill="#d99b9b"/>
+              <path d="M192 92 L205 28 L144 58 Z" fill="#8c6246" stroke="#593a25" stroke-width="2.5" stroke-linejoin="round"/>
+              <path d="M185 84 L194 42 L155 62 Z" fill="#d99b9b"/>
+              <path d="M60 175 C52 215, 72 232, 120 232 C168 232, 188 215, 180 175 Z" fill="#9c7052" stroke="#593a25" stroke-width="2.5"/>
+              <ellipse cx="120" cy="128" rx="74" ry="64" fill="#a87b5c" stroke="#593a25" stroke-width="2.5"/>
+              <ellipse cx="120" cy="150" rx="36" ry="26" fill="#f5ebe1"/>
+              <path d="M120 72 L120 96 M106 75 L112 96 M134 75 L128 96" stroke="#4a2e1b" stroke-width="5" stroke-linecap="round"/>
+              <g>
+                <ellipse cx="90" cy="122" rx="13" ry="11" fill="#d4be50" stroke="#3b2313" stroke-width="2"/>
+                <ellipse cx="90" cy="122" rx="4" ry="9" fill="#1a110a"/>
+                <path d="M73 112 L106 121 L104 108 L75 105 Z" fill="#785137"/>
+                <line x1="72" y1="112" x2="107" y2="122" stroke="#3b2313" stroke-width="3.5" stroke-linecap="round"/>
+                <ellipse cx="150" cy="122" rx="13" ry="11" fill="#d4be50" stroke="#3b2313" stroke-width="2"/>
+                <ellipse cx="150" cy="122" rx="4" ry="9" fill="#1a110a"/>
+                <path d="M167 112 L134 121 L136 108 L165 105 Z" fill="#785137"/>
+                <line x1="168" y1="112" x2="133" y2="122" stroke="#3b2313" stroke-width="3.5" stroke-linecap="round"/>
+              </g>
+              <polygon points="115,138 125,138 120,145" fill="#d17b88"/>
+              <path d="M106 158 Q120 148 134 158" stroke="#3b2313" stroke-width="3" fill="none" stroke-linecap="round"/>
+              <g transform="translate(65, 56) rotate(-15)">
+                <g fill="#f48fb1" stroke="#ad1457" stroke-width="1.5">
+                  <ellipse cx="0" cy="-12" rx="8" ry="11"/>
+                  <ellipse cx="11" cy="-4" rx="11" ry="8"/>
+                  <ellipse cx="7" cy="10" rx="9" ry="10"/>
+                  <ellipse cx="-7" cy="10" rx="9" ry="10"/>
+                  <ellipse cx="-11" cy="-4" rx="11" ry="8"/>
+                </g>
+                <circle cx="0" cy="0" r="5" fill="#fff176"/>
+              </g>
+            </svg>
+          </div>
+
+          <h2 class="font-impact text-5xl sm:text-6xl md:text-7xl text-[#7a2342] tracking-wide mb-6">
+            HOW DARE YOU
+          </h2>
+
+          <button onclick="goToPage(1)" class="canva-pill-btn text-2xl sm:text-3xl px-10 py-3 bg-[#8e3554]">
+            Go back
+          </button>
+        </div>
+      </section>
+
+      <!-- =========================================================
+           PAGE 3: "YES" BRANCH — SURPRISE AWAITS
+           ========================================================= -->
+      <section id="page-3" class="page-slide">
+        <div class="flex flex-col items-center text-center max-w-xl mx-auto">
+
+          <div class="anim-happy mb-2">
+            <svg class="w-44 h-44 sm:w-56 sm:h-56 drop-shadow-xl" viewBox="0 0 260 260">
+              <path d="M52 95 L36 35 L98 62 Z" fill="#dcd2c8" stroke="#cbbeb2" stroke-width="2" stroke-linejoin="round"/>
+              <path d="M56 88 L45 46 L88 65 Z" fill="#f2bac9"/>
+              <path d="M208 95 L224 35 L162 62 Z" fill="#dcd2c8" stroke="#cbbeb2" stroke-width="2" stroke-linejoin="round"/>
+              <path d="M204 88 L215 46 L172 65 Z" fill="#f2bac9"/>
+              <path d="M68 185 C58 215, 70 242, 130 242 C190 242, 202 215, 192 185 Z" fill="#faf6f2" stroke="#d8cec5" stroke-width="2"/>
+              <ellipse cx="130" cy="135" rx="85" ry="72" fill="#ffffff" stroke="#d8cec5" stroke-width="2"/>
+              <ellipse cx="75" cy="148" rx="24" ry="16" fill="#f48fb1" opacity="0.55"/>
+              <ellipse cx="185" cy="148" rx="24" ry="16" fill="#f48fb1" opacity="0.55"/>
+              <ellipse cx="95" cy="128" rx="14" ry="15" fill="#231815"/>
+              <circle cx="89" cy="121" r="5" fill="#ffffff"/>
+              <circle cx="99" cy="133" r="2.5" fill="#ffffff"/>
+              <ellipse cx="165" cy="128" rx="14" ry="15" fill="#231815"/>
+              <circle cx="159" cy="121" r="5" fill="#ffffff"/>
+              <circle cx="169" cy="133" r="2.5" fill="#ffffff"/>
+              <polygon points="125,140 135,140 130,147" fill="#eca1b5"/>
+              <path d="M116 151 Q123 160 130 151 Q137 160 144 151" stroke="#594943" stroke-width="2.8" fill="none" stroke-linecap="round"/>
+              <g transform="translate(175, 58) rotate(18)">
+                <path d="M0 0 C-22 -18, -28 14, -4 8 C-14 22, -6 32, 2 12 Z" fill="#f7a8c4" stroke="#d97a9c" stroke-width="1.5"/>
+                <path d="M6 0 C28 -18, 34 14, 10 8 C20 22, 12 32, 4 12 Z" fill="#f7a8c4" stroke="#d97a9c" stroke-width="1.5"/>
+                <g fill="#fce4ec" stroke="#e58ca8" stroke-width="1.5">
+                  <circle cx="3" cy="-9" r="7"/>
+                  <circle cx="12" cy="-2" r="7"/>
+                  <circle cx="8" cy="9" r="7"/>
+                  <circle cx="-3" cy="9" r="7"/>
+                  <circle cx="-6" cy="-2" r="7"/>
+                </g>
+                <circle cx="3" cy="1" r="4.5" fill="#f5c242"/>
+              </g>
+            </svg>
+          </div>
+
+          <div class="flex items-center justify-center gap-3 mb-5">
+            <h2 id="display-p3-title" class="font-brush text-4xl sm:text-5xl md:text-6xl text-[#7a2342] font-bold">
+              A little birthday surprise awaits 🌸
+            </h2>
+          </div>
+
+          <button onclick="goToPage(4)" class="canva-pill-btn text-xl sm:text-3xl px-10 sm:px-12 py-2.5">
+            Click to continue
+          </button>
+        </div>
+      </section>
+
+      <!-- =========================================================
+           PAGE 4: BIRTHDAY GREETING SCREEN ("HAPPY BIRTHDAY, POOJA MISS")
+           ========================================================= -->
+      <section id="page-4" class="page-slide">
+        <div class="flex flex-col items-center text-center max-w-2xl mx-auto px-4 pb-10">
+
+          <div class="anim-bob mb-3">
+            <svg class="w-48 h-48 sm:w-64 sm:h-64 drop-shadow-xl" viewBox="0 0 260 270">
+              <polygon points="130,8 92,82 168,82" fill="#e58ca8" stroke="#7a2342" stroke-width="2.5" stroke-linejoin="round"/>
+              <path d="M102 62 Q130 72 158 62" stroke="#fce4ec" stroke-width="4" fill="none"/>
+              <path d="M114 40 Q130 48 146 40" stroke="#fce4ec" stroke-width="4" fill="none"/>
+              <circle cx="130" cy="8" r="8" fill="#f4bbd0" stroke="#7a2342" stroke-width="2"/>
+
+              <path d="M58 108 L40 52 L96 76 Z" fill="#8b8589" stroke="#5c5659" stroke-width="2.5"/>
+              <path d="M62 100 L49 62 L88 79 Z" fill="#eca8b8"/>
+              <path d="M202 108 L220 52 L164 76 Z" fill="#8b8589" stroke="#5c5659" stroke-width="2.5"/>
+              <path d="M198 100 L211 62 L172 79 Z" fill="#eca8b8"/>
+
+              <ellipse cx="130" cy="142" rx="76" ry="62" fill="#9e989c" stroke="#5c5659" stroke-width="2.5"/>
+              <path d="M130 95 C105 125, 72 145, 72 178 C72 195, 100 204, 130 204 C160 204, 188 195, 188 178 C188 145, 155 125, 130 95 Z" fill="#ffffff"/>
+              <circle cx="96" cy="138" r="12.5" fill="#2b2623"/>
+              <circle cx="92" cy="133" r="4.5" fill="#ffffff"/>
+              <circle cx="164" cy="138" r="12.5" fill="#2b2623"/>
+              <circle cx="160" cy="133" r="4.5" fill="#ffffff"/>
+              <polygon points="125,148 135,148 130,154" fill="#f092a5"/>
+              <path d="M120 160 Q125 166 130 159 Q135 166 140 160" stroke="#4a3f3d" stroke-width="2.4" fill="none" stroke-linecap="round"/>
+
+              <path d="M74 192 C66 232, 80 258, 130 258 C180 258, 194 232, 186 192 Z" fill="#ffffff" stroke="#d0c8cc" stroke-width="2"/>
+
+              <g transform="translate(52, 168)">
+                <ellipse cx="45" cy="68" rx="42" ry="8" fill="#e0d6da" stroke="#7a2342" stroke-width="2"/>
+                <rect x="13" y="34" width="64" height="32" rx="6" fill="#f9d5e0" stroke="#7a2342" stroke-width="2"/>
+                <path d="M13 40 Q22 50 30 40 Q38 52 46 40 Q54 50 62 40 Q70 50 77 40 L77 34 L13 34 Z" fill="#ffffff" stroke="#7a2342" stroke-width="1.8"/>
+                <circle cx="25" cy="31" r="5" fill="#e63956"/>
+                <circle cx="45" cy="31" r="5" fill="#e63956"/>
+                <circle cx="65" cy="31" r="5" fill="#e63956"/>
+                <rect x="28" y="14" width="5" height="16" fill="#fff3b0" stroke="#7a2342" stroke-width="1.5"/>
+                <rect x="43" y="12" width="5" height="18" fill="#fff3b0" stroke="#7a2342" stroke-width="1.5"/>
+                <rect x="58" y="14" width="5" height="16" fill="#fff3b0" stroke="#7a2342" stroke-width="1.5"/>
+                <path class="anim-candle" d="M30.5 4 C27 9, 28 13, 30.5 13 C33 13, 34 9, 30.5 4 Z" fill="#ff9f1c"/>
+                <path class="anim-candle" d="M45.5 2 C42 7, 43 11, 45.5 11 C48 11, 49 7, 45.5 2 Z" fill="#ff9f1c"/>
+                <path class="anim-candle" d="M60.5 4 C57 9, 58 13, 60.5 13 C63 13, 64 9, 60.5 4 Z" fill="#ff9f1c"/>
+              </g>
+            </svg>
+          </div>
+
+          <div class="flex flex-wrap items-center justify-center gap-2 sm:gap-3 mb-2">
+            <h1 id="display-p4-title" class="font-impact text-4xl sm:text-6xl md:text-7xl text-[#7a2342] tracking-wide">
+              HAPPY BIRTHDAY, POOJA MISS
+            </h1>
+            <span class="text-3xl sm:text-5xl anim-pulse">✨</span>
+          </div>
+
+          <p id="display-p4-line1" class="font-pill text-sm sm:text-lg md:text-xl font-bold text-[#2b1d22] tracking-wider uppercase mb-1">
+            May your days be filled with happiness, peace, laughter, and beautiful little moments.
+          </p>
+          <p id="display-p4-line2" class="font-pill text-sm sm:text-lg md:text-xl font-bold text-[#7a2342] tracking-wider uppercase">
+            STAY HAPPY, KEEP SMILING ALWAYS 🌸
+          </p>
+
+          <!-- Mobile-friendly inline Next Button (shows cleanly on small screens) -->
+          <button onclick="goToPage(5)" class="mt-5 sm:hidden group cursor-pointer focus:outline-none">
+            <div class="px-7 py-2 rounded-full bg-[#f3c6d3] border-2 border-[#7a2342] shadow-md">
+              <span class="font-brush text-2xl font-bold text-[#7a2342]">Next →</span>
+            </div>
+          </button>
+        </div>
+
+        <!-- Bottom-Right Hand-Drawn "Next" Button (Tablet & Laptop) -->
+        <button onclick="goToPage(5)" class="hidden sm:block absolute bottom-12 right-12 group cursor-pointer focus:outline-none">
+          <div class="relative flex flex-col items-center">
+            <div class="px-7 py-2 rounded-full bg-[#f3c6d3] border-2 border-[#7a2342] shadow-md group-hover:scale-105 transition transform -rotate-6">
+              <span class="font-brush text-2xl sm:text-3xl font-bold text-[#7a2342]">Next</span>
+            </div>
+            <svg class="w-24 h-8 -mt-1 text-[#2b1d22] group-hover:translate-x-1 transition" viewBox="0 0 100 32" fill="none">
+              <path d="M8 18 Q50 28 88 12" stroke="currentColor" stroke-width="2.5" stroke-linecap="round"/>
+              <path d="M78 7 L90 11 L82 22" stroke="currentColor" stroke-width="2.5" stroke-linecap="round" stroke-linejoin="round"/>
+            </svg>
+          </div>
+        </button>
+      </section>
+
+      <!-- =========================================================
+           PAGE 5: SEALED ENVELOPE SCREEN ("Tap here to open")
+           ========================================================= -->
+      <section id="page-5" class="page-slide">
+        <div onclick="openEnvelopeToPage6()" class="flex flex-col items-center text-center cursor-pointer group max-w-xl mx-auto px-4">
+
+          <div id="sealedEnvelopeGraphic" class="anim-bob transition-transform duration-500 group-hover:scale-105 mb-5">
+            <svg class="w-72 sm:w-96 md:w-[430px] h-auto drop-shadow-xl" viewBox="0 0 420 280">
+              <rect x="10" y="15" width="400" height="250" rx="8" fill="#f5d0dc" stroke="#d99bb0" stroke-width="2"/>
+              <polygon points="10,265 210,145 410,265" fill="#efbec0" opacity="0.45"/>
+              <polygon points="10,15 165,140 10,265" fill="#f0c4d2" stroke="#dfabc0" stroke-width="1.5"/>
+              <polygon points="410,15 255,140 410,265" fill="#f0c4d2" stroke="#dfabc0" stroke-width="1.5"/>
+              <polygon points="10,15 210,160 410,15" fill="#f7dae4" stroke="#d99bb0" stroke-width="2"/>
+
+              <rect x="10" y="130" width="400" height="18" fill="#c96986"/>
+              <path d="M10 15 L210 142 L410 15" stroke="#c96986" stroke-width="14" fill="none"/>
+
+              <g transform="translate(210, 140)">
+                <path d="M0 0 C-55 -42, -78 15, -8 12 Z" fill="#d47491" stroke="#a84665" stroke-width="2"/>
+                <path d="M-12 -4 C-42 -22, -52 6, -14 5" stroke="#e69ab2" stroke-width="3" fill="none"/>
+                <path d="M0 0 C55 -42, 78 15, 8 12 Z" fill="#d47491" stroke="#a84665" stroke-width="2"/>
+                <path d="M12 -4 C42 -22, 52 6, 14 5" stroke="#e69ab2" stroke-width="3" fill="none"/>
+                <path d="M-6 8 C-25 45, -45 68, -58 85 L-35 88 C-24 65, -10 38, -2 10 Z" fill="#c25e7d" stroke="#a84665" stroke-width="1.5"/>
+                <path d="M6 8 C25 45, 45 68, 58 85 L35 88 C24 65, 10 38, 2 10 Z" fill="#c25e7d" stroke="#a84665" stroke-width="1.5"/>
+                <rect x="-11" y="-9" width="22" height="22" rx="6" fill="#b85272" stroke="#963956" stroke-width="2"/>
+              </g>
+            </svg>
+          </div>
+
+          <p class="font-whisper text-4xl sm:text-5xl md:text-6xl text-[#592536] group-hover:text-[#7a2342] transition">
+            Tap here to open
+          </p>
+        </div>
+      </section>
+
+      <!-- =========================================================
+           PAGE 6: OPENED STATIONERY ENVELOPE & FRIENDLY BIRTHDAY NOTE
+           ========================================================= -->
+      <section id="page-6" class="page-slide">
+        <div class="w-full max-w-2xl mx-auto flex flex-col items-center justify-center px-2 sm:px-4 pt-6 pb-6">
+
+          <div class="relative w-full max-w-xl flex flex-col items-center">
+
+            <!-- Open Envelope Top Flap Peeking Behind Letter -->
+            <svg class="w-[92%] max-w-[500px] h-9 sm:h-12 -mb-2 z-0 drop-shadow-sm" viewBox="0 0 500 60" preserveAspectRatio="none">
+              <path d="M8 60 L250 4 L492 60 Z" fill="#e8b8c8" stroke="#d49aae" stroke-width="2"/>
+              <path d="M24 60 L250 14 L476 60 Z" fill="#f3cbd8"/>
+            </svg>
+
+            <!-- Soft Pink Envelope Frame Wrapper -->
+            <div class="relative z-10 w-full bg-[#f5cedb] border-2 border-[#d99bb0] rounded-2xl p-2.5 sm:p-3.5 shadow-xl">
+
+              <!-- Silver Paperclip -->
+              <svg class="absolute -top-4 left-7 w-6 h-11 text-stone-500 z-30 pointer-events-none" viewBox="0 0 30 55" fill="none">
+                <path d="M18 12 V38 C18 45, 6 45, 6 38 V10 C6 2, 24 2, 24 10 V42 C24 52, 2 52, 2 42 V16" stroke="currentColor" stroke-width="2.5" stroke-linecap="round"/>
+              </svg>
+
+              <!-- Cute Peeking Cat Perched on Top-Right Corner -->
+              <div class="absolute -top-10 sm:-top-11 right-4 sm:right-6 z-30 pointer-events-none transform rotate-6">
+                <svg class="w-16 h-16 sm:w-20 sm:h-20 drop-shadow-md" viewBox="0 0 120 120">
+                  <polygon points="22,52 12,15 48,32" fill="#9e958f" stroke="#4a423e" stroke-width="2"/>
+                  <polygon points="98,52 108,15 72,32" fill="#9e958f" stroke="#4a423e" stroke-width="2"/>
+                  <ellipse cx="60" cy="65" rx="42" ry="35" fill="#fffcf9" stroke="#6e655f" stroke-width="2"/>
+                  <path d="M20 55 C30 30, 90 30, 100 55 C82 42, 38 42, 20 55 Z" fill="#8c827a"/>
+                  <circle cx="44" cy="64" r="7" fill="#231f20"/>
+                  <circle cx="42" cy="61" r="2.4" fill="#ffffff"/>
+                  <circle cx="76" cy="64" r="7" fill="#231f20"/>
+                  <circle cx="74" cy="61" r="2.4" fill="#ffffff"/>
+                  <polygon points="57,72 63,72 60,76" fill="#eca1b5"/>
+                  <ellipse cx="38" cy="96" rx="11" ry="8" fill="#ffffff" stroke="#6e655f" stroke-width="2"/>
+                  <ellipse cx="82" cy="96" rx="11" ry="8" fill="#ffffff" stroke="#6e655f" stroke-width="2"/>
+                </svg>
+              </div>
+
+              <!-- Full Readable Stationery Letter Card (Friendly Birthday Note for Pooja Miss) -->
+              <div class="stationery-letter anim-letter-emerge relative z-20 w-full rounded-xl border border-[#e3c8d2] px-5 py-5 sm:px-8 sm:py-6">
+                <div class="flex items-center justify-between border-b border-pink-200/80 pb-2 mb-3">
+                  <span class="font-brush text-2xl sm:text-3xl font-bold text-[#7a2342]">Dear Pooja Miss,</span>
+                  <span class="text-lg">🌸</span>
+                </div>
+
+                <div id="display-p6-note" class="letter-scroll max-h-[45vh] sm:max-h-[50vh] overflow-y-auto pr-2 space-y-3 text-left font-pill text-[14px] sm:text-[15.5px] leading-[26px] sm:leading-[28px] text-[#2b1e23] font-medium">
+                  <p>Wishing you a very, very Happy Birthday! 🌸</p>
+                  <p>I wanted to make something simple and thoughtful just to wish you a wonderful day. May this new year of your life bring you lots of happiness, good health, peace of mind, and success in everything you wish to achieve.</p>
+                  <p>Thank you for always being such a kind and wonderful friend. Stay happy, keep smiling, and enjoy your special day to the fullest.</p>
+                  <p class="font-bold text-[#7a2342]">Have the happiest birthday, Pooja Miss! ✨ — Best wishes from your friend 🌷</p>
+                </div>
+              </div>
+
+              <!-- Envelope Bottom Fold Accent & Seal -->
+              <div class="relative flex items-center justify-center mt-2">
+                <div class="w-full h-[2px] bg-[#d99bb0]/60 rounded-full"></div>
+                <div class="absolute w-9 h-9 rounded-full bg-[#b85272] border-2 border-[#f7dce6] shadow-md flex items-center justify-center text-sm">
+                  🌸
+                </div>
+              </div>
+
+            </div>
+          </div>
+
+          <button onclick="goToPage(7)" class="mt-4 group cursor-pointer focus:outline-none z-40">
+            <div class="relative flex flex-col items-center">
+              <svg class="w-11 h-7 -mb-2.5 z-10 text-[#7a2342]" viewBox="0 0 60 36" fill="none">
+                <path d="M30 18 C14 2, 4 18, 22 22 C12 28, 18 34, 28 22" fill="#f4b8cc" stroke="currentColor" stroke-width="2.5"/>
+                <path d="M30 18 C46 2, 56 18, 38 22 C48 28, 42 34, 32 22" fill="#f4b8cc" stroke="currentColor" stroke-width="2.5"/>
+                <circle cx="30" cy="19" r="4" fill="#7a2342"/>
+              </svg>
+              <div class="px-7 py-2 rounded-full bg-[#f4c2d2] border-2 border-[#7a2342] shadow-md group-hover:scale-105 transition">
+                <span class="font-pill text-base sm:text-lg font-bold text-[#7a2342]">Click here →</span>
+              </div>
+            </div>
+          </button>
+
+        </div>
+      </section>
+
+      <!-- =========================================================
+           PAGE 7: 3D GIFT BOX SURPRISE
+           ========================================================= -->
+      <section id="page-7" class="page-slide">
+        <div class="flex flex-col items-center text-center max-w-2xl mx-auto px-4">
+
+          <h1 id="display-p7-title" class="font-brush text-4xl sm:text-5xl md:text-6xl font-bold text-[#7a2342] leading-snug mb-6 sm:mb-8">
+            A little birthday gift for you, Pooja Miss 🌸
+          </h1>
+
+          <!-- Interactive 3D Pink Gift Box -->
+          <div class="relative flex flex-col sm:flex-row items-center justify-center">
+            <button onclick="openGiftPopup()" class="anim-wobble cursor-pointer focus:outline-none group">
+              <svg class="w-48 h-48 sm:w-64 sm:h-64 drop-shadow-2xl group-hover:scale-105 transition" viewBox="0 0 240 240">
+                <ellipse cx="120" cy="212" rx="75" ry="14" fill="rgba(122, 35, 66, 0.22)"/>
+                <polygon points="40,102 120,132 120,208 40,174" fill="#d97a98" stroke="#9e4764" stroke-width="1.5"/>
+                <polygon points="200,102 120,132 120,208 200,174" fill="#b85876" stroke="#9e4764" stroke-width="1.5"/>
+                <polygon points="73,114 88,120 88,195 73,188" fill="#f7c8d7"/>
+                <polygon points="167,114 152,120 152,195 167,188" fill="#e6afc1"/>
+                <polygon points="120,56 32,86 120,118 208,86" fill="#f2adc2" stroke="#b55b7a" stroke-width="1.5"/>
+                <polygon points="32,86 120,118 120,140 32,106" fill="#e38da8" stroke="#9e4764" stroke-width="1.5"/>
+                <polygon points="208,86 120,118 120,140 208,106" fill="#c76b88" stroke="#9e4764" stroke-width="1.5"/>
+                <polygon points="74,71 90,66 168,100 152,106" fill="#fce4ec"/>
+                <polygon points="166,71 150,66 72,100 88,106" fill="#fce4ec"/>
+                <g transform="translate(120, 76)">
+                  <path d="M0 0 C-48 -38, -68 8, -10 12 Z" fill="#e07b9b" stroke="#9e4764" stroke-width="2"/>
+                  <path d="M0 0 C48 -38, 68 8, 10 12 Z" fill="#f095b2" stroke="#9e4764" stroke-width="2"/>
+                  <path d="M-5 8 L-34 32 L-18 36 L0 12 Z" fill="#d4688a"/>
+                  <path d="M5 8 L34 32 L18 36 L0 12 Z" fill="#e07b9b"/>
+                  <ellipse cx="0" cy="4" rx="11" ry="9" fill="#c25577" stroke="#9e4764" stroke-width="2"/>
+                </g>
+              </svg>
+            </button>
+
+            <!-- Responsive "Tap here" Label -->
+            <div onclick="openGiftPopup()" class="mt-2 sm:mt-0 sm:ml-2 flex items-center cursor-pointer group">
+              <svg class="hidden sm:block w-16 h-12 text-[#4a2532] group-hover:-translate-x-1 transition" viewBox="0 0 80 60" fill="none">
+                <path d="M72 45 C40 48, 25 35, 16 14" stroke="currentColor" stroke-width="2.2" stroke-linecap="round"/>
+                <path d="M10 24 L15 12 L27 18" stroke="currentColor" stroke-width="2.2" stroke-linecap="round" stroke-linejoin="round"/>
+              </svg>
+              <span class="font-whisper text-4xl sm:text-5xl text-[#4a2532] group-hover:text-[#7a2342] transition sm:mt-6">
+                Tap here
+              </span>
+            </div>
+          </div>
+
+        </div>
+
+        <!-- Bottom-Right Royal Plushie -->
+        <div class="absolute bottom-8 right-6 sm:bottom-10 sm:right-12 pointer-events-none hidden sm:block">
+          <svg class="w-28 h-28 sm:w-36 sm:h-36 drop-shadow-md" viewBox="0 0 140 140">
+            <ellipse cx="70" cy="112" rx="48" ry="16" fill="#7fa6c4" stroke="#4a6b82" stroke-width="2"/>
+            <circle cx="22" cy="112" r="5" fill="#e6c265"/>
+            <circle cx="118" cy="112" r="5" fill="#e6c265"/>
+            <ellipse cx="70" cy="86" rx="34" ry="28" fill="#ffffff" stroke="#ccc4be" stroke-width="2"/>
+            <circle cx="58" cy="82" r="4" fill="#2b2220"/>
+            <circle cx="82" cy="82" r="4" fill="#2b2220"/>
+            <ellipse cx="70" cy="88" rx="4" ry="3" fill="#f09bb0"/>
+            <polygon points="52,60 58,42 70,54 82,42 88,60" fill="#f5c84c" stroke="#b5891c" stroke-width="2" stroke-linejoin="round"/>
+          </svg>
+        </div>
+      </section>
+
+      <!-- =========================================================
+           PAGE 8: BIRTHDAY QUOTES & FLOWER BOUQUET
+           ========================================================= -->
+      <section id="page-8" class="page-slide">
+        <div class="flex flex-col items-center text-center max-w-2xl mx-auto px-3 sm:px-4">
+
+          <h1 id="display-p8-title" class="font-brush text-4xl sm:text-5xl md:text-6xl font-bold text-[#7a2342] leading-snug mb-4">
+            A few little birthday quotes for you 🌷
+          </h1>
+
+          <!-- Cute Bouquet + Quote Card Layout -->
+          <div class="w-full max-w-xl bg-[#fffdf9]/95 border-2 border-[#d99bb0] rounded-3xl p-5 sm:p-7 shadow-xl relative">
+            <div class="flex flex-col sm:flex-row items-center gap-4 sm:gap-6">
+              <!-- Flower Bouquet Illustration -->
+              <div class="anim-bob shrink-0">
+                <svg class="w-28 h-32 sm:w-36 sm:h-40 drop-shadow-lg" viewBox="0 0 180 200">
+                  <path d="M90 110 L55 45 M90 110 L90 35 M90 110 L125 48 M90 110 L72 60 M90 110 L110 62" stroke="#4d8b55" stroke-width="5" stroke-linecap="round"/>
+                  <circle cx="55" cy="45" r="16" fill="#f2647d"/>
+                  <circle cx="90" cy="35" r="18" fill="#ffb703"/>
+                  <circle cx="125" cy="48" r="16" fill="#ff758f"/>
+                  <circle cx="72" cy="64" r="15" fill="#a8dadc"/>
+                  <circle cx="110" cy="66" r="15" fill="#cdb4db"/>
+                  <circle cx="90" cy="60" r="16" fill="#e63956"/>
+                  <polygon points="42,88 138,88 106,184 74,184" fill="#e0b084" stroke="#b5835a" stroke-width="2" stroke-linejoin="round"/>
+                  <polygon points="34,76 90,98 146,76 138,88 42,88" fill="#ecc8a5" stroke="#b5835a" stroke-width="1.5"/>
+                  <rect x="72" y="132" width="36" height="8" rx="3" fill="#b85272"/>
+                  <path d="M90 136 L76 156 M90 136 L104 156" stroke="#b85272" stroke-width="5" stroke-linecap="round"/>
+                </svg>
+              </div>
+
+              <!-- Interactive Quote Area -->
+              <div class="flex-1 text-center sm:text-left">
+                <span id="quoteCounterBadge" class="inline-block px-3 py-1 rounded-full bg-[#fce8ef] text-[#7a2342] font-pill text-xs font-bold mb-2">
+                  Quote 1 of 4
+                </span>
+                <p id="birthdayQuoteText" class="font-pill text-base sm:text-lg text-[#2b1e23] font-semibold leading-relaxed min-h-[84px] flex items-center">
+                  “May your coming year bring gentle mornings, genuine smiles, and everything you quietly hope for.”
+                </p>
+                <div class="mt-3 flex items-center justify-center sm:justify-start gap-2">
+                  <button onclick="nextQuote()" class="px-4 py-1.5 rounded-full bg-[#fce8ef] hover:bg-[#f7d5e1] text-[#7a2342] border-2 border-[#d48aa4] font-pill font-semibold text-xs sm:text-sm transition">
+                    ✨ Next Quote
+                  </button>
+                </div>
+              </div>
+            </div>
+          </div>
+
+          <!-- Next Button to Closing Page -->
+          <button onclick="goToPage(9)" class="canva-pill-btn text-lg sm:text-xl px-9 py-2.5 mt-6">
+            One last thing →
+          </button>
+        </div>
+      </section>
+
+      <!-- =========================================================
+           PAGE 9: CLOSING PAGE WITH TYPEWRITER ANIMATION & DESIGN
+           ========================================================= -->
+      <section id="page-9" class="page-slide">
+        <div class="relative w-full max-w-2xl mx-auto flex flex-col items-center justify-center px-3 sm:px-6 pb-6">
+
+          <!-- Floating Decorative Sparkles Around Card -->
+          <span class="hidden sm:block absolute -top-4 left-6 text-2xl text-[#b85d79] anim-twinkle pointer-events-none">✦</span>
+          <span class="hidden sm:block absolute top-14 -right-2 text-xl text-[#d47491] anim-twinkle pointer-events-none" style="animation-delay: 0.8s;">✧</span>
+          <span class="hidden sm:block absolute bottom-16 -left-3 text-xl text-[#b85d79] anim-twinkle pointer-events-none" style="animation-delay: 1.4s;">🌸</span>
+
+          <!-- Decorative Bow Emblem Sitting on Top of Card -->
+          <div class="relative z-20 -mb-5 anim-bob">
+            <div class="w-16 h-16 sm:w-20 sm:h-20 rounded-full bg-[#fff9fb] border-2 border-[#d48aa4] shadow-lg flex items-center justify-center">
+              <svg class="w-11 h-11 sm:w-12 sm:h-12" viewBox="0 0 80 80" fill="none">
+                <path d="M40 42 C22 20, 8 36, 28 45 C16 54, 24 64, 38 48 Z" fill="#f2a7c0" stroke="#7a2342" stroke-width="2.5" stroke-linejoin="round"/>
+                <path d="M40 42 C58 20, 72 36, 52 45 C64 54, 56 64, 42 48 Z" fill="#f2a7c0" stroke="#7a2342" stroke-width="2.5" stroke-linejoin="round"/>
+                <circle cx="40" cy="40" r="8" fill="#b85272" stroke="#7a2342" stroke-width="2"/>
+                <circle cx="40" cy="40" r="3" fill="#fff9fb"/>
+              </svg>
+            </div>
+          </div>
+
+          <!-- Main Closing Stationery Card -->
+          <div class="closing-card relative z-10 w-full rounded-3xl border-2 border-[#d99bb0] px-6 pt-9 pb-7 sm:px-10 sm:pt-11 sm:pb-9 text-center">
+
+            <!-- Delicate Inner Corner Flourishes -->
+            <div class="absolute top-3 left-3 w-6 h-6 border-t-2 border-l-2 border-[#d99bb0]/70 rounded-tl-lg pointer-events-none"></div>
+            <div class="absolute top-3 right-3 w-6 h-6 border-t-2 border-r-2 border-[#d99bb0]/70 rounded-tr-lg pointer-events-none"></div>
+            <div class="absolute bottom-3 left-3 w-6 h-6 border-b-2 border-l-2 border-[#d99bb0]/70 rounded-bl-lg pointer-events-none"></div>
+            <div class="absolute bottom-3 right-3 w-6 h-6 border-b-2 border-r-2 border-[#d99bb0]/70 rounded-br-lg pointer-events-none"></div>
+
+            <!-- Closing Heading -->
+            <h1 id="display-p9-title" class="font-brush text-3xl sm:text-5xl font-bold text-[#7a2342] leading-tight mb-4">
+              And that's my little wish for you. 🌸
+            </h1>
+
+            <!-- Subtle Divider Line -->
+            <div class="flex items-center justify-center gap-3 mb-5">
+              <span class="h-[1.5px] w-16 sm:w-24 bg-gradient-to-r from-transparent to-[#d48aa4]"></span>
+              <span class="text-[#b85272] text-sm">✦ 🌸 ✦</span>
+              <span class="h-[1.5px] w-16 sm:w-24 bg-gradient-to-l from-transparent to-[#d48aa4]"></span>
+            </div>
+
+            <!-- Live Typewriter Message Area -->
+            <div class="min-h-[145px] sm:min-h-[165px] flex items-center justify-center px-1 sm:px-3">
+              <p class="font-pill text-[15px] sm:text-lg leading-relaxed sm:leading-8 text-[#362028] font-medium whitespace-pre-line">
+                <span id="closingTypewriterOutput"></span><span id="closingCursor" class="typewriter-cursor"></span>
+              </p>
+            </div>
+
+            <!-- Replay & Re-type Controls -->
+            <div class="mt-6 flex flex-wrap items-center justify-center gap-3">
+              <button onclick="goToPage(1)" class="canva-pill-btn text-sm sm:text-base px-7 py-2 gap-2">
+                <span>↻ Replay Surprise</span>
+              </button>
+              <button onclick="startClosingTypewriter()" class="px-5 py-2 rounded-full bg-[#fce8ef] hover:bg-[#f7d5e1] text-[#7a2342] border-2 border-[#d48aa4] font-pill font-semibold text-sm sm:text-base transition">
+                ✨ Replay Wish
+              </button>
+            </div>
+
+          </div>
+        </div>
+      </section>
+
+      <!-- =========================================================
+           BOTTOM PAGE NAVIGATION PILL (9 Pages Total)
+           ========================================================= -->
+      <div class="absolute bottom-2.5 left-1/2 -translate-x-1/2 z-40 flex items-center gap-1.5 px-3 py-1.5 rounded-full bg-black/15 backdrop-blur-sm">
+        <button onclick="goToPage(1)" class="nav-dot w-5 h-2.5 rounded-full bg-[#7a2342] transition-all" title="Page 1: Hey!!"></button>
+        <button onclick="goToPage(2)" class="nav-dot w-2.5 h-2.5 rounded-full bg-white/70 transition-all" title="Page 2: How Dare You"></button>
+        <button onclick="goToPage(3)" class="nav-dot w-2.5 h-2.5 rounded-full bg-white/70 transition-all" title="Page 3: Surprise Awaits"></button>
+        <button onclick="goToPage(4)" class="nav-dot w-2.5 h-2.5 rounded-full bg-white/70 transition-all" title="Page 4: Happy Birthday Pooja Miss"></button>
+        <button onclick="goToPage(5)" class="nav-dot w-2.5 h-2.5 rounded-full bg-white/70 transition-all" title="Page 5: Sealed Envelope"></button>
+        <button onclick="goToPage(6)" class="nav-dot w-2.5 h-2.5 rounded-full bg-white/70 transition-all" title="Page 6: Birthday Note"></button>
+        <button onclick="goToPage(7)" class="nav-dot w-2.5 h-2.5 rounded-full bg-white/70 transition-all" title="Page 7: Gift Surprise"></button>
+        <button onclick="goToPage(8)" class="nav-dot w-2.5 h-2.5 rounded-full bg-white/70 transition-all" title="Page 8: Birthday Quotes"></button>
+        <button onclick="goToPage(9)" class="nav-dot w-2.5 h-2.5 rounded-full bg-white/70 transition-all" title="Page 9: Closing Wish"></button>
+      </div>
+
+    </div>
+  </div>
+
+  <!-- =========================================================
+       GIFT OPENED POPUP MODAL (Appears on Page 7 After Opening Gift)
+       ========================================================= -->
+  <div id="giftPopupModal" class="fixed inset-0 bg-black/45 backdrop-blur-sm z-50 hidden items-center justify-center p-4">
+    <div class="anim-pop-in relative bg-[#fffdf9] border-2 border-[#b85d79] rounded-3xl max-w-md w-full p-6 sm:p-8 text-center shadow-2xl">
+      <!-- Floating Top Gift Icon -->
+      <div class="w-16 h-16 mx-auto -mt-14 mb-3 rounded-full bg-[#fce4ec] border-2 border-[#b85d79] shadow-md flex items-center justify-center text-3xl anim-pulse">
+        🎁
+      </div>
+
+      <h3 class="font-brush text-3xl sm:text-4xl font-bold text-[#7a2342] mb-3">
+        A Little Wish Inside ✨
+      </h3>
+
+      <p id="display-gift-popup-msg" class="font-pill text-[15px] sm:text-lg leading-relaxed text-[#331f26] font-medium mb-6">
+        My gift isn't something wrapped in paper — it's simply a sincere wish for your happiness, your dreams, and all the wonderful things waiting ahead of you, Pooja Miss. Happy Birthday!
+      </p>
+
+      <button onclick="continueFromGiftPopup()" class="canva-pill-btn text-lg sm:text-xl px-9 py-2.5">
+        Continue 🌸
+      </button>
+    </div>
+  </div>
+
+  <!-- =========================================================
+       CUSTOMIZE TEXT MODAL
+       ========================================================= -->
+  <div id="customizeModal" class="fixed inset-0 bg-black/55 backdrop-blur-sm z-50 hidden items-center justify-center p-4">
+    <div class="bg-[#fff9fb] border-2 border-[#7a2342] rounded-2xl max-w-lg w-full max-h-[88vh] overflow-y-auto p-5 sm:p-6 shadow-2xl">
+      <div class="flex items-center justify-between border-b border-pink-200 pb-3 mb-4">
+        <h3 class="font-pill text-xl font-bold text-[#7a2342]">✨ Customize Birthday Wishes</h3>
+        <button onclick="closeCustomizeModal()" class="w-8 h-8 rounded-full bg-pink-100 hover:bg-pink-200 text-[#7a2342] font-bold">✕</button>
+      </div>
+
+      <div class="space-y-4 text-sm">
+        <div>
+          <label class="block font-bold text-[#7a2342] mb-1">Page 4 Birthday Title:</label>
+          <input id="input-p4-title" type="text" class="w-full px-3 py-2 rounded-lg border border-pink-300 focus:outline-none focus:border-[#7a2342]" />
+        </div>
+
+        <div>
+          <label class="block font-bold text-[#7a2342] mb-1">Page 6 Birthday Note (blank lines create paragraphs):</label>
+          <textarea id="input-p6-note" rows="7" class="w-full px-3 py-2 rounded-lg border border-pink-300 focus:outline-none focus:border-[#7a2342] leading-relaxed"></textarea>
+        </div>
+
+        <div>
+          <label class="block font-bold text-[#7a2342] mb-1">Page 7 Gift Popup Wish:</label>
+          <textarea id="input-gift-msg" rows="3" class="w-full px-3 py-2 rounded-lg border border-pink-300 focus:outline-none focus:border-[#7a2342]"></textarea>
+        </div>
+
+        <div>
+          <label class="block font-bold text-[#7a2342] mb-1">Page 9 Closing Typewriter Message:</label>
+          <textarea id="input-p9-closing" rows="5" class="w-full px-3 py-2 rounded-lg border border-pink-300 focus:outline-none focus:border-[#7a2342]"></textarea>
+        </div>
+      </div>
+
+      <div class="mt-6 flex justify-end gap-3">
+        <button onclick="closeCustomizeModal()" class="px-4 py-2 rounded-full bg-stone-200 hover:bg-stone-300 text-stone-700 font-bold text-sm">Cancel</button>
+        <button onclick="saveCustomizations()" class="px-6 py-2 rounded-full bg-[#7a2342] hover:bg-[#942c51] text-white font-bold text-sm shadow-md">Save Changes 🌸</button>
+      </div>
+    </div>
+  </div>
+
+  <script>
+    // =========================================================
+    // STATE & SOUND SYNTHESIS (Tone.js)
+    // =========================================================
+    let currentPage = 1;
+    let soundEnabled = true;
+    let closingTypewriterTimer = null;
+
+    let closingMessageText =
+      "Happy Birthday once again, Pooja Miss.\n\n" +
+      "Thank you for always being such a kind and wonderful friend. I hope the year ahead brings you peace, good health, warm smiles, and everything you hope for.\n\n" +
+      "Have a truly wonderful birthday! 🌸";
+
+    const birthdayQuotes = [
+      "“May your coming year bring gentle mornings, genuine smiles, and everything you quietly hope for.”",
+      "“Count your life by smiles, not tears. Count your age by happy memories, not just years.”",
+      "“The best chapters are often the ones you haven't even reached yet. Keep blooming at your own pace.”",
+      "“Good friends are like quiet stars — you don't always see them every second, but they always brighten your sky.”"
+    ];
+    let currentQuoteIdx = 0;
+
+    async function playSound(type) {
+      if (!soundEnabled || typeof Tone === 'undefined') return;
+      try {
+        if (Tone.context.state !== 'running') {
+          await Tone.start();
+        }
+        const synth = new Tone.PolySynth(Tone.Synth, {
+          oscillator: { type: 'sine' },
+          envelope: { attack: 0.01, decay: 0.18, sustain: 0.05, release: 0.4 }
+        }).toDestination();
+        synth.volume.value = -10;
+
+        if (type === 'pop') {
+          synth.triggerAttackRelease(['E5', 'G#5'], '16n');
+        } else if (type === 'angry') {
+          synth.triggerAttackRelease(['C3', 'F#3'], '8n');
+        } else if (type === 'sparkle') {
+          const now = Tone.now();
+          synth.triggerAttackRelease('C5', '16n', now);
+          synth.triggerAttackRelease('E5', '16n', now + 0.07);
+          synth.triggerAttackRelease('G5', '16n', now + 0.14);
+          synth.triggerAttackRelease('C6', '8n', now + 0.21);
+        } else if (type === 'key') {
+          synth.volume.value = -22;
+          synth.triggerAttackRelease('A5', '32n');
+        }
+      } catch (e) {
+        // Ignore audio context restrictions before user gesture
+      }
+    }
+
+    function toggleSound() {
+      soundEnabled = !soundEnabled;
+      document.getElementById('soundIcon').textContent = soundEnabled ? '🔊' : '🔇';
+    }
+
+    // =========================================================
+    // PAGE NAVIGATION (9 PAGES TOTAL)
+    // =========================================================
+    function goToPage(pageNum) {
+      if (closingTypewriterTimer) clearInterval(closingTypewriterTimer);
+      closeGiftPopup();
+
+      document.querySelectorAll('.page-slide').forEach(sec => {
+        sec.classList.remove('active');
+      });
+
+      const target = document.getElementById(`page-${pageNum}`);
+      if (target) {
+        target.classList.add('active');
+        target.scrollTop = 0;
+      }
+      currentPage = pageNum;
+
+      // Subtle blush-rose backdrop for the Closing Page (Page 9)
+      const stage = document.getElementById('canvaStage');
+      if (pageNum === 9) {
+        stage.classList.add('closing-bg');
+      } else {
+        stage.classList.remove('closing-bg');
+      }
+
+      // Show sketched corner flowers on Envelope, Quotes & Closing Pages
+      const flowers = document.getElementById('cornerSketchFlowers');
+      flowers.style.opacity = (pageNum === 5 || pageNum === 6 || pageNum === 8 || pageNum === 9) ? '1' : '0';
+
+      // Scroll letter back to top when opening Page 6
+      if (pageNum === 6) {
+        const letterBox = document.getElementById('display-p6-note');
+        if (letterBox) letterBox.scrollTop = 0;
+      }
+
+      // Update bottom navigation dots
+      document.querySelectorAll('.nav-dot').forEach((dot, idx) => {
+        if (idx + 1 === pageNum) {
+          dot.className = 'nav-dot w-5 h-2.5 rounded-full bg-[#7a2342] transition-all';
+        } else {
+          dot.className = 'nav-dot w-2.5 h-2.5 rounded-full bg-white/70 transition-all';
+        }
+      });
+
+      // Page-specific sound effects
+      if (pageNum === 2) {
+        playSound('angry');
+      } else if (pageNum === 4 || pageNum === 6 || pageNum === 8 || pageNum === 9) {
+        playSound('sparkle');
+      } else {
+        playSound('pop');
+      }
+
+      // Page 9: Start Closing Typewriter Animation
+      if (pageNum === 9) {
+        startClosingTypewriter();
+      }
+    }
+
+    function openEnvelopeToPage6() {
+      spawnSparkleBurst(window.innerWidth / 2, window.innerHeight / 2);
+      goToPage(6);
+    }
+
+    // =========================================================
+    // PAGE 7: GIFT POPUP LOGIC
+    // =========================================================
+    function openGiftPopup() {
+      playSound('sparkle');
+      spawnSparkleBurst(window.innerWidth / 2, window.innerHeight / 2);
+      const popup = document.getElementById('giftPopupModal');
+      popup.classList.remove('hidden');
+      popup.classList.add('flex');
+    }
+
+    function closeGiftPopup() {
+      const popup = document.getElementById('giftPopupModal');
+      popup.classList.add('hidden');
+      popup.classList.remove('flex');
+    }
+
+    function continueFromGiftPopup() {
+      closeGiftPopup();
+      goToPage(8);
+    }
+
+    // =========================================================
+    // PAGE 8: BIRTHDAY QUOTES SWITCHER
+    // =========================================================
+    function nextQuote() {
+      playSound('pop');
+      currentQuoteIdx = (currentQuoteIdx + 1) % birthdayQuotes.length;
+      const quoteEl = document.getElementById('birthdayQuoteText');
+      const badgeEl = document.getElementById('quoteCounterBadge');
+
+      quoteEl.classList.remove('anim-quote-fade');
+      void quoteEl.offsetWidth; // trigger reflow for smooth fade
+      quoteEl.textContent = birthdayQuotes[currentQuoteIdx];
+      quoteEl.classList.add('anim-quote-fade');
+
+      badgeEl.textContent = `Quote ${currentQuoteIdx + 1} of ${birthdayQuotes.length}`;
+    }
+
+    // =========================================================
+    // PAGE 9: CLOSING TYPEWRITER ANIMATION
+    // =========================================================
+    function startClosingTypewriter() {
+      if (closingTypewriterTimer) clearInterval(closingTypewriterTimer);
+
+      const output = document.getElementById('closingTypewriterOutput');
+      const cursor = document.getElementById('closingCursor');
+      output.textContent = '';
+      cursor.style.display = 'inline-block';
+
+      const chars = Array.from(closingMessageText);
+      let index = 0;
+
+      closingTypewriterTimer = setInterval(() => {
+        if (index < chars.length) {
+          output.textContent += chars[index];
+          if (index % 4 === 0 && chars[index].trim() !== '') {
+            playSound('key');
+          }
+          index++;
+        } else {
+          clearInterval(closingTypewriterTimer);
+          spawnSparkleBurst(window.innerWidth / 2, window.innerHeight / 2);
+        }
+      }, 42);
+    }
+
+    // =========================================================
+    // FLOATING FLOWER / SPARKLE CLICK PARTICLES
+    // =========================================================
+    function spawnSparkleBurst(x, y) {
+      const emojis = ['🌸', '✨', '🌷', '🌼', '🎂'];
+      for (let i = 0; i < 8; i++) {
+        const el = document.createElement('div');
+        el.className = 'click-particle text-xl sm:text-2xl';
+        el.textContent = emojis[Math.floor(Math.random() * emojis.length)];
+        const offsetX = (Math.random() - 0.5) * 90;
+        const offsetY = (Math.random() - 0.5) * 40;
+        el.style.left = `${x + offsetX}px`;
+        el.style.top = `${y + offsetY}px`;
+        document.body.appendChild(el);
+        setTimeout(() => el.remove(), 1000);
+      }
+    }
+
+    document.addEventListener('click', (e) => {
+      if (e.target.closest('#customizeModal')) return;
+      const el = document.createElement('div');
+      el.className = 'click-particle text-lg';
+      el.textContent = Math.random() > 0.5 ? '🌸' : '✨';
+      el.style.left = `${e.clientX}px`;
+      el.style.top = `${e.clientY}px`;
+      document.body.appendChild(el);
+      setTimeout(() => el.remove(), 950);
+    });
+
+    // =========================================================
+    // CUSTOMIZE MODAL LOGIC
+    // =========================================================
+    function getLetterPlainText() {
+      const paragraphs = Array.from(document.querySelectorAll('#display-p6-note p'));
+      return paragraphs.map(p => p.textContent.trim()).join('\n\n');
+    }
+
+    function openCustomizeModal() {
+      document.getElementById('input-p4-title').value = document.getElementById('display-p4-title').textContent.trim();
+      document.getElementById('input-p6-note').value = getLetterPlainText();
+      document.getElementById('input-gift-msg').value = document.getElementById('display-gift-popup-msg').textContent.trim();
+      document.getElementById('input-p9-closing').value = closingMessageText;
+
+      const modal = document.getElementById('customizeModal');
+      modal.classList.remove('hidden');
+      modal.classList.add('flex');
+    }
+
+    function closeCustomizeModal() {
+      const modal = document.getElementById('customizeModal');
+      modal.classList.add('hidden');
+      modal.classList.remove('flex');
+    }
+
+    function saveCustomizations() {
+      const p4Title = document.getElementById('input-p4-title').value.trim();
+      const p6Note = document.getElementById('input-p6-note').value.trim();
+      const giftMsg = document.getElementById('input-gift-msg').value.trim();
+      const p9Closing = document.getElementById('input-p9-closing').value.trim();
+
+      if (p4Title) document.getElementById('display-p4-title').textContent = p4Title;
+      if (giftMsg) document.getElementById('display-gift-popup-msg').textContent = giftMsg;
+
+      if (p6Note) {
+        const noteContainer = document.getElementById('display-p6-note');
+        noteContainer.innerHTML = '';
+        const paragraphs = p6Note.split(/\n\s*\n/);
+        paragraphs.forEach((text, index) => {
+          const p = document.createElement('p');
+          p.textContent = text.trim();
+          if (index === paragraphs.length - 1) {
+            p.className = 'font-bold text-[#7a2342]';
+          }
+          noteContainer.appendChild(p);
+        });
+      }
+
+      if (p9Closing) {
+        closingMessageText = p9Closing;
+        if (currentPage === 9) startClosingTypewriter();
+      }
+
+      closeCustomizeModal();
+    }
+  </script>
+</body>
+</html>
