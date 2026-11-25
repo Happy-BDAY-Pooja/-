@@ -1,0 +1,1576 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=5.0" />
+  <title>Happy Birthday, Pooja Miss 🌸</title>
+  <link rel="preconnect" href="https://fonts.googleapis.com" />
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
+  <link href="https://fonts.googleapis.com/css2?family=Cormorant+Garamond:ital,wght@0,600;0,700;1,600&family=Quicksand:wght@400;500;600;700&display=swap" rel="stylesheet" />
+  <style>
+    /* =========================================
+       SOFT PASTEL THEME (LIGHT & CLEAN)
+    ========================================= */
+    :root {
+      --bg-1: #fff6f9;
+      --bg-2: #f8f2ff;
+      --bg-3: #fff9f2;
+      --card-bg: rgba(255, 255, 255, 0.84);
+      --card-solid: #ffffff;
+      --border-soft: rgba(232, 148, 180, 0.28);
+      --border-strong: rgba(219, 112, 147, 0.42);
+      --text-main: #432c39;
+      --text-soft: #755b69;
+      --pink: #e4719c;
+      --pink-deep: #c94e7e;
+      --pink-light: #fde8f0;
+      --lavender: #9f7aea;
+      --lavender-light: #f3ecff;
+      --peach: #f6ad8f;
+      --peach-light: #fff1ea;
+      --shadow-soft: 0 14px 36px rgba(186, 112, 147, 0.13);
+      --shadow-hover: 0 18px 42px rgba(186, 112, 147, 0.22);
+      --font-body: 'Quicksand', -apple-system, BlinkMacSystemFont, 'Segoe UI', sans-serif;
+      --font-display: 'Cormorant Garamond', Georgia, serif;
+      --radius-lg: 26px;
+      --radius-md: 18px;
+      --radius-pill: 999px;
+      --ease: cubic-bezier(0.22, 1, 0.36, 1);
+    }
+
+    *, *::before, *::after {
+      box-sizing: border-box;
+      margin: 0;
+      padding: 0;
+      -webkit-tap-highlight-color: transparent;
+    }
+
+    html {
+      scroll-behavior: smooth;
+      font-family: var(--font-body);
+    }
+
+    body {
+      min-height: 100dvh;
+      color: var(--text-main);
+      background: linear-gradient(135deg, var(--bg-1) 0%, var(--bg-2) 52%, var(--bg-3) 100%);
+      background-attachment: fixed;
+      overflow-x: hidden;
+      line-height: 1.65;
+      position: relative;
+    }
+
+    /* =========================================
+       GENTLE FLOATING PASTEL BLOBS & PETALS
+    ========================================= */
+    .pastel-bg {
+      position: fixed;
+      inset: 0;
+      z-index: -2;
+      overflow: hidden;
+      pointer-events: none;
+    }
+
+    .blob {
+      position: absolute;
+      border-radius: 50%;
+      filter: blur(75px);
+      opacity: 0.65;
+      animation: floatBlob 18s ease-in-out infinite alternate;
+    }
+
+    .blob-1 {
+      width: 46vw;
+      height: 46vw;
+      max-width: 440px;
+      max-height: 440px;
+      top: -10%;
+      left: -8%;
+      background: #ffd6e7;
+    }
+
+    .blob-2 {
+      width: 44vw;
+      height: 44vw;
+      max-width: 420px;
+      max-height: 420px;
+      bottom: -10%;
+      right: -8%;
+      background: #e9d8fd;
+      animation-delay: -6s;
+    }
+
+    .blob-3 {
+      width: 34vw;
+      height: 34vw;
+      max-width: 340px;
+      max-height: 340px;
+      top: 42%;
+      left: 60%;
+      background: #ffe3d3;
+      animation-delay: -11s;
+    }
+
+    @keyframes floatBlob {
+      0% { transform: translate(0, 0) scale(1); }
+      50% { transform: translate(24px, -22px) scale(1.06); }
+      100% { transform: translate(-20px, 24px) scale(0.96); }
+    }
+
+    #fxCanvas {
+      position: fixed;
+      inset: 0;
+      z-index: -1;
+      pointer-events: none;
+    }
+
+    /* =========================================
+       SIMPLE CLEAN TOP STEP NAVIGATION
+    ========================================= */
+    .top-bar {
+      position: sticky;
+      top: 14px;
+      z-index: 100;
+      width: calc(100% - 28px);
+      max-width: 780px;
+      margin: 14px auto 0;
+      padding: 10px 16px;
+      background: rgba(255, 255, 255, 0.8);
+      backdrop-filter: blur(14px);
+      -webkit-backdrop-filter: blur(14px);
+      border: 1px solid var(--border-soft);
+      border-radius: var(--radius-pill);
+      box-shadow: 0 8px 26px rgba(186, 112, 147, 0.1);
+      display: flex;
+      align-items: center;
+      justify-content: space-between;
+      gap: 10px;
+    }
+
+    .site-mark {
+      display: flex;
+      align-items: center;
+      gap: 8px;
+      font-family: var(--font-display);
+      font-size: 1.32rem;
+      font-weight: 700;
+      color: var(--pink-deep);
+      cursor: pointer;
+      white-space: nowrap;
+      padding-left: 4px;
+    }
+
+    .nav-tabs {
+      display: flex;
+      align-items: center;
+      gap: 4px;
+    }
+
+    .nav-tab {
+      border: none;
+      background: transparent;
+      color: var(--text-soft);
+      font-family: var(--font-body);
+      font-size: 0.88rem;
+      font-weight: 600;
+      padding: 8px 14px;
+      border-radius: var(--radius-pill);
+      cursor: pointer;
+      transition: all 0.35s var(--ease);
+    }
+
+    .nav-tab:hover {
+      background: var(--pink-light);
+      color: var(--pink-deep);
+    }
+
+    .nav-tab.active {
+      background: linear-gradient(135deg, var(--pink), var(--lavender));
+      color: #ffffff;
+      box-shadow: 0 6px 16px rgba(228, 113, 156, 0.32);
+    }
+
+    /* Mobile Bottom Pill Navigation */
+    .mobile-bar {
+      display: none;
+      position: fixed;
+      bottom: 14px;
+      left: 50%;
+      transform: translateX(-50%);
+      z-index: 120;
+      width: calc(100% - 28px);
+      max-width: 420px;
+      background: rgba(255, 255, 255, 0.92);
+      backdrop-filter: blur(16px);
+      -webkit-backdrop-filter: blur(16px);
+      border: 1px solid var(--border-soft);
+      border-radius: var(--radius-pill);
+      padding: 6px;
+      box-shadow: 0 12px 30px rgba(186, 112, 147, 0.2);
+      justify-content: space-between;
+      gap: 4px;
+    }
+
+    .mobile-btn {
+      flex: 1;
+      border: none;
+      background: transparent;
+      color: var(--text-soft);
+      font-family: var(--font-body);
+      font-size: 0.72rem;
+      font-weight: 700;
+      padding: 7px 4px;
+      border-radius: var(--radius-pill);
+      display: flex;
+      flex-direction: column;
+      align-items: center;
+      gap: 2px;
+      cursor: pointer;
+      transition: all 0.3s var(--ease);
+    }
+
+    .mobile-btn .m-icon {
+      font-size: 1.05rem;
+      line-height: 1;
+    }
+
+    .mobile-btn.active {
+      background: linear-gradient(135deg, var(--pink), var(--lavender));
+      color: #ffffff;
+      box-shadow: 0 4px 12px rgba(228, 113, 156, 0.3);
+    }
+
+    /* =========================================
+       STAGE & SMOOTH PAGE TRANSITIONS
+    ========================================= */
+    .stage {
+      width: 100%;
+      max-width: 820px;
+      margin: 0 auto;
+      padding: 28px 18px 80px;
+      min-height: calc(100dvh - 88px);
+      display: flex;
+      flex-direction: column;
+      justify-content: center;
+    }
+
+    .page {
+      display: none;
+      opacity: 0;
+      transform: translateY(20px) scale(0.985);
+      transition: opacity 0.45s var(--ease), transform 0.5s var(--ease);
+    }
+
+    .page.active {
+      display: block;
+    }
+
+    .page.visible {
+      opacity: 1;
+      transform: translateY(0) scale(1);
+    }
+
+    .page.leaving {
+      opacity: 0;
+      transform: translateY(-16px) scale(0.985);
+    }
+
+    /* Staggered soft reveal */
+    .reveal {
+      opacity: 0;
+      transform: translateY(18px);
+      transition: opacity 0.55s var(--ease), transform 0.55s var(--ease);
+    }
+
+    .page.visible .reveal {
+      opacity: 1;
+      transform: translateY(0);
+    }
+
+    .page.visible .reveal:nth-child(2) { transition-delay: 0.08s; }
+    .page.visible .reveal:nth-child(3) { transition-delay: 0.16s; }
+    .page.visible .reveal:nth-child(4) { transition-delay: 0.24s; }
+    .page.visible .reveal:nth-child(5) { transition-delay: 0.32s; }
+
+    /* =========================================
+       SHARED CARD & BUTTON STYLES
+    ========================================= */
+    .soft-card {
+      background: var(--card-bg);
+      backdrop-filter: blur(14px);
+      -webkit-backdrop-filter: blur(14px);
+      border: 1px solid var(--border-soft);
+      border-radius: var(--radius-lg);
+      padding: 28px;
+      box-shadow: var(--shadow-soft);
+      transition: transform 0.35s var(--ease), box-shadow 0.35s var(--ease), border-color 0.35s ease;
+    }
+
+    .soft-card.clickable {
+      cursor: pointer;
+    }
+
+    .soft-card.clickable:hover {
+      transform: translateY(-5px);
+      box-shadow: var(--shadow-hover);
+      border-color: var(--border-strong);
+    }
+
+    .badge {
+      display: inline-flex;
+      align-items: center;
+      gap: 6px;
+      padding: 6px 15px;
+      border-radius: var(--radius-pill);
+      background: var(--pink-light);
+      color: var(--pink-deep);
+      font-size: 0.82rem;
+      font-weight: 700;
+      letter-spacing: 0.03em;
+      margin-bottom: 14px;
+    }
+
+    .page-head {
+      text-align: center;
+      margin-bottom: 26px;
+    }
+
+    .page-title {
+      font-family: var(--font-display);
+      font-size: clamp(2.1rem, 5.5vw, 3.1rem);
+      font-weight: 700;
+      line-height: 1.15;
+      color: var(--text-main);
+      margin-bottom: 8px;
+    }
+
+    .page-title span {
+      color: var(--pink-deep);
+      font-style: italic;
+    }
+
+    .page-sub {
+      color: var(--text-soft);
+      font-size: 0.98rem;
+      max-width: 540px;
+      margin: 0 auto;
+    }
+
+    .btn {
+      display: inline-flex;
+      align-items: center;
+      justify-content: center;
+      gap: 8px;
+      padding: 12px 24px;
+      border-radius: var(--radius-pill);
+      border: none;
+      font-family: var(--font-body);
+      font-size: 0.95rem;
+      font-weight: 700;
+      cursor: pointer;
+      transition: transform 0.3s cubic-bezier(0.34, 1.56, 0.64, 1), box-shadow 0.3s ease, background 0.3s ease;
+      user-select: none;
+    }
+
+    .btn-primary {
+      background: linear-gradient(135deg, var(--pink), var(--lavender));
+      color: #ffffff;
+      box-shadow: 0 10px 22px rgba(228, 113, 156, 0.32);
+    }
+
+    .btn-primary:hover {
+      transform: translateY(-3px) scale(1.02);
+      box-shadow: 0 14px 26px rgba(228, 113, 156, 0.42);
+    }
+
+    .btn-soft {
+      background: #ffffff;
+      color: var(--pink-deep);
+      border: 1px solid var(--border-soft);
+      box-shadow: 0 6px 16px rgba(186, 112, 147, 0.08);
+    }
+
+    .btn-soft:hover {
+      transform: translateY(-2px);
+      background: var(--pink-light);
+      border-color: var(--border-strong);
+    }
+
+    .pager {
+      display: flex;
+      justify-content: space-between;
+      align-items: center;
+      margin-top: 28px;
+      gap: 12px;
+    }
+
+    /* =========================================
+       PAGE 1: BIRTHDAY WELCOME
+    ========================================= */
+    .welcome-card {
+      text-align: center;
+      padding: 40px 28px;
+      position: relative;
+      overflow: hidden;
+    }
+
+    .cake-circle {
+      width: 96px;
+      height: 96px;
+      margin: 0 auto 18px;
+      border-radius: 50%;
+      background: linear-gradient(135deg, var(--pink-light), var(--lavender-light));
+      border: 2px solid rgba(255, 255, 255, 0.9);
+      box-shadow: 0 10px 24px rgba(228, 113, 156, 0.2);
+      display: grid;
+      place-items: center;
+      font-size: 2.8rem;
+      animation: gentleBob 3.4s ease-in-out infinite;
+    }
+
+    @keyframes gentleBob {
+      0%, 100% { transform: translateY(0); }
+      50% { transform: translateY(-7px); }
+    }
+
+    .hero-heading {
+      font-family: var(--font-display);
+      font-size: clamp(2.4rem, 7vw, 3.8rem);
+      font-weight: 700;
+      line-height: 1.1;
+      margin-bottom: 14px;
+      color: var(--text-main);
+    }
+
+    .hero-heading span {
+      background: linear-gradient(135deg, var(--pink-deep), var(--lavender));
+      -webkit-background-clip: text;
+      -webkit-text-fill-color: transparent;
+      font-style: italic;
+    }
+
+    .typewriter-pill {
+      display: inline-flex;
+      align-items: center;
+      justify-content: center;
+      min-height: 44px;
+      padding: 8px 18px;
+      margin: 4px auto 20px;
+      border-radius: var(--radius-md);
+      background: rgba(253, 232, 240, 0.65);
+      border: 1px solid var(--border-soft);
+      color: var(--pink-deep);
+      font-size: clamp(0.92rem, 2.4vw, 1.05rem);
+      font-weight: 600;
+      max-width: 100%;
+    }
+
+    .cursor {
+      display: inline-block;
+      width: 2px;
+      height: 1.15em;
+      background: var(--pink-deep);
+      margin-left: 4px;
+      animation: blink 0.8s infinite;
+    }
+
+    @keyframes blink {
+      0%, 49% { opacity: 1; }
+      50%, 100% { opacity: 0; }
+    }
+
+    .welcome-text {
+      color: var(--text-soft);
+      max-width: 500px;
+      margin: 0 auto 26px;
+      font-size: 1rem;
+    }
+
+    /* Gift Box Mini Card */
+    .gift-trigger {
+      display: inline-flex;
+      align-items: center;
+      gap: 12px;
+      padding: 14px 22px;
+      border-radius: var(--radius-md);
+      background: linear-gradient(135deg, #fff0f6, #f5eeff);
+      border: 1.5px dashed var(--pink);
+      cursor: pointer;
+      margin-bottom: 26px;
+      transition: transform 0.3s cubic-bezier(0.34, 1.56, 0.64, 1), box-shadow 0.3s ease;
+    }
+
+    .gift-trigger:hover {
+      transform: scale(1.04) translateY(-2px);
+      box-shadow: 0 12px 26px rgba(228, 113, 156, 0.22);
+    }
+
+    .gift-icon {
+      font-size: 1.9rem;
+      animation: wiggle 2.6s ease-in-out infinite;
+    }
+
+    @keyframes wiggle {
+      0%, 82%, 100% { transform: rotate(0deg); }
+      86% { transform: rotate(-10deg); }
+      92% { transform: rotate(10deg); }
+      96% { transform: rotate(-6deg); }
+    }
+
+    .gift-copy {
+      text-align: left;
+    }
+
+    .gift-copy strong {
+      display: block;
+      font-size: 0.95rem;
+      color: var(--text-main);
+    }
+
+    .gift-copy small {
+      color: var(--text-soft);
+      font-size: 0.82rem;
+    }
+
+    .welcome-actions {
+      display: flex;
+      flex-wrap: wrap;
+      justify-content: center;
+      gap: 12px;
+    }
+
+    /* =========================================
+       PAGE 2: BIRTHDAY QUOTES
+    ========================================= */
+    .quotes-grid {
+      display: grid;
+      grid-template-columns: repeat(2, 1fr);
+      gap: 16px;
+      margin-bottom: 22px;
+    }
+
+    .quote-card {
+      padding: 24px 22px;
+      display: flex;
+      flex-direction: column;
+      justify-content: space-between;
+      gap: 14px;
+      position: relative;
+    }
+
+    .quote-card.tint-pink { background: linear-gradient(150deg, rgba(255, 255, 255, 0.92), rgba(253, 232, 240, 0.72)); }
+    .quote-card.tint-lav { background: linear-gradient(150deg, rgba(255, 255, 255, 0.92), rgba(243, 236, 255, 0.78)); }
+    .quote-card.tint-peach { background: linear-gradient(150deg, rgba(255, 255, 255, 0.92), rgba(255, 241, 234, 0.78)); }
+
+    .quote-mark {
+      font-family: var(--font-display);
+      font-size: 2.4rem;
+      line-height: 0.7;
+      color: var(--pink);
+      opacity: 0.7;
+    }
+
+    .quote-text {
+      font-family: var(--font-display);
+      font-size: 1.32rem;
+      font-weight: 600;
+      line-height: 1.42;
+      color: var(--text-main);
+    }
+
+    .quote-footer {
+      display: flex;
+      align-items: center;
+      justify-content: space-between;
+      font-size: 0.82rem;
+      font-weight: 700;
+      color: var(--pink-deep);
+      padding-top: 8px;
+      border-top: 1px solid rgba(228, 113, 156, 0.16);
+    }
+
+    .random-wish-bar {
+      text-align: center;
+      padding: 22px;
+      display: flex;
+      flex-direction: column;
+      align-items: center;
+      gap: 12px;
+    }
+
+    /* =========================================
+       PAGE 3: BIRTHDAY WISHES & LITTLE NOTES
+    ========================================= */
+    .notes-grid {
+      display: grid;
+      grid-template-columns: repeat(2, 1fr);
+      gap: 16px;
+      margin-bottom: 22px;
+    }
+
+    .note-envelope {
+      text-align: center;
+      padding: 26px 20px;
+      position: relative;
+    }
+
+    .note-envelope.opened {
+      border-color: var(--pink);
+      background: rgba(255, 255, 255, 0.95);
+    }
+
+    .note-status {
+      position: absolute;
+      top: 14px;
+      right: 16px;
+      font-size: 0.78rem;
+      font-weight: 700;
+      color: var(--pink-deep);
+      opacity: 0;
+      transition: opacity 0.3s ease;
+    }
+
+    .note-envelope.opened .note-status {
+      opacity: 1;
+    }
+
+    .env-icon {
+      width: 58px;
+      height: 58px;
+      margin: 0 auto 12px;
+      border-radius: 18px;
+      background: var(--pink-light);
+      display: grid;
+      place-items: center;
+      font-size: 1.75rem;
+      transition: transform 0.35s var(--ease);
+    }
+
+    .note-envelope:hover .env-icon {
+      transform: scale(1.1) rotate(-4deg);
+    }
+
+    .note-envelope h3 {
+      font-size: 1.08rem;
+      font-weight: 700;
+      margin-bottom: 6px;
+      color: var(--text-main);
+    }
+
+    .note-envelope p {
+      font-size: 0.88rem;
+      color: var(--text-soft);
+    }
+
+    /* Make a Wish Cake Card */
+    .candle-card {
+      text-align: center;
+      padding: 28px 22px;
+      background: linear-gradient(135deg, rgba(255, 255, 255, 0.92), rgba(253, 232, 240, 0.75));
+    }
+
+    .candles-row {
+      display: flex;
+      justify-content: center;
+      gap: 14px;
+      margin: 14px 0 18px;
+    }
+
+    .candle-item {
+      font-size: 2rem;
+      transition: transform 0.4s ease, opacity 0.4s ease;
+    }
+
+    .candle-item.blown {
+      transform: scale(0.85);
+      opacity: 0.55;
+    }
+
+    /* =========================================
+       PAGE 4: FINAL BIRTHDAY LETTER
+    ========================================= */
+    .letter-shell {
+      max-width: 660px;
+      margin: 0 auto;
+    }
+
+    .sealed-box {
+      text-align: center;
+      padding: 44px 24px;
+      cursor: pointer;
+    }
+
+    .seal-circle {
+      width: 86px;
+      height: 86px;
+      margin: 0 auto 18px;
+      border-radius: 50%;
+      background: linear-gradient(135deg, var(--pink), var(--lavender));
+      color: #ffffff;
+      display: grid;
+      place-items: center;
+      font-size: 2.2rem;
+      box-shadow: 0 12px 28px rgba(228, 113, 156, 0.36);
+      animation: gentleBob 2.8s ease-in-out infinite;
+    }
+
+    .paper-letter {
+      display: none;
+      padding: 34px 30px;
+      background: #ffffff;
+      border: 1px solid var(--border-soft);
+      border-radius: var(--radius-lg);
+      box-shadow: var(--shadow-soft);
+      position: relative;
+      animation: openPaper 0.6s var(--ease) forwards;
+    }
+
+    .paper-letter.show {
+      display: block;
+    }
+
+    @keyframes openPaper {
+      from { opacity: 0; transform: translateY(18px) scale(0.97); }
+      to { opacity: 1; transform: translateY(0) scale(1); }
+    }
+
+    .paper-top {
+      display: flex;
+      justify-content: space-between;
+      align-items: center;
+      border-bottom: 1px solid var(--pink-light);
+      padding-bottom: 14px;
+      margin-bottom: 18px;
+      flex-wrap: wrap;
+      gap: 8px;
+    }
+
+    .paper-salutation {
+      font-family: var(--font-display);
+      font-size: 1.75rem;
+      font-weight: 700;
+      font-style: italic;
+      color: var(--pink-deep);
+    }
+
+    .paper-date {
+      font-size: 0.82rem;
+      font-weight: 700;
+      color: var(--text-soft);
+      background: var(--lavender-light);
+      padding: 5px 12px;
+      border-radius: var(--radius-pill);
+    }
+
+    .letter-text {
+      font-size: 1.03rem;
+      line-height: 1.85;
+      color: var(--text-main);
+      white-space: pre-line;
+      min-height: 185px;
+      margin-bottom: 22px;
+    }
+
+    .paper-actions {
+      display: flex;
+      flex-wrap: wrap;
+      justify-content: space-between;
+      align-items: center;
+      gap: 10px;
+      border-top: 1px solid var(--pink-light);
+      padding-top: 16px;
+    }
+
+    /* =========================================
+       SWEET PASTEL POP-UP MODAL
+    ========================================= */
+    .modal-backdrop {
+      position: fixed;
+      inset: 0;
+      z-index: 500;
+      background: rgba(67, 44, 57, 0.32);
+      backdrop-filter: blur(8px);
+      -webkit-backdrop-filter: blur(8px);
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      padding: 18px;
+      opacity: 0;
+      visibility: hidden;
+      transition: opacity 0.3s ease, visibility 0.3s ease;
+    }
+
+    .modal-backdrop.open {
+      opacity: 1;
+      visibility: visible;
+    }
+
+    .modal-card {
+      width: 100%;
+      max-width: 440px;
+      background: linear-gradient(160deg, #ffffff 0%, #fff7fa 100%);
+      border: 1.5px solid var(--border-strong);
+      border-radius: 26px;
+      padding: 30px 26px;
+      text-align: center;
+      box-shadow: 0 24px 55px rgba(145, 76, 111, 0.24);
+      position: relative;
+      transform: translateY(22px) scale(0.93);
+      transition: transform 0.38s cubic-bezier(0.34, 1.56, 0.64, 1);
+    }
+
+    .modal-backdrop.open .modal-card {
+      transform: translateY(0) scale(1);
+    }
+
+    .modal-close {
+      position: absolute;
+      top: 14px;
+      right: 14px;
+      width: 34px;
+      height: 34px;
+      border-radius: 50%;
+      border: 1px solid var(--border-soft);
+      background: var(--pink-light);
+      color: var(--pink-deep);
+      font-size: 1rem;
+      font-weight: 700;
+      cursor: pointer;
+      display: grid;
+      place-items: center;
+      transition: transform 0.25s ease;
+    }
+
+    .modal-close:hover {
+      transform: rotate(90deg);
+    }
+
+    .modal-icon {
+      font-size: 2.8rem;
+      margin-bottom: 10px;
+      display: inline-block;
+    }
+
+    .modal-title {
+      font-family: var(--font-display);
+      font-size: 1.75rem;
+      font-weight: 700;
+      color: var(--text-main);
+      margin-bottom: 10px;
+      line-height: 1.2;
+    }
+
+    .modal-msg {
+      font-size: 0.98rem;
+      color: var(--text-soft);
+      line-height: 1.7;
+      margin-bottom: 22px;
+    }
+
+    /* =========================================
+       MOBILE RESPONSIVE ADJUSTMENTS
+    ========================================= */
+    @media (max-width: 680px) {
+      .nav-tabs {
+        display: none;
+      }
+
+      .top-bar {
+        justify-content: center;
+      }
+
+      .mobile-bar {
+        display: flex;
+      }
+
+      .stage {
+        padding: 18px 14px 96px;
+        justify-content: flex-start;
+      }
+
+      .quotes-grid,
+      .notes-grid {
+        grid-template-columns: 1fr;
+      }
+
+      .welcome-card {
+        padding: 30px 18px;
+      }
+
+      .soft-card {
+        padding: 22px 18px;
+      }
+
+      .paper-letter {
+        padding: 24px 18px;
+      }
+    }
+  </style>
+</head>
+<body>
+
+  <!-- SOFT PASTEL AMBIENT BACKGROUND -->
+  <div class="pastel-bg" aria-hidden="true">
+    <div class="blob blob-1"></div>
+    <div class="blob blob-2"></div>
+    <div class="blob blob-3"></div>
+  </div>
+  <canvas id="fxCanvas" aria-hidden="true"></canvas>
+
+  <!-- CLEAN TOP NAVIGATION -->
+  <header class="top-bar">
+    <div class="site-mark" onclick="goToPage('welcome')">🌸 Pooja Miss</div>
+    <nav class="nav-tabs" aria-label="Main Navigation">
+      <button class="nav-tab active" data-target="welcome" onclick="goToPage('welcome')">Welcome</button>
+      <button class="nav-tab" data-target="quotes" onclick="goToPage('quotes')">Quotes</button>
+      <button class="nav-tab" data-target="wishes" onclick="goToPage('wishes')">Wishes</button>
+      <button class="nav-tab" data-target="letter" onclick="goToPage('letter')">Birthday Note</button>
+    </nav>
+  </header>
+
+  <!-- CLEAN MOBILE BOTTOM BAR -->
+  <nav class="mobile-bar" aria-label="Mobile Navigation">
+    <button class="mobile-btn active" data-target="welcome" onclick="goToPage('welcome')">
+      <span class="m-icon">🎂</span>
+      <span>Home</span>
+    </button>
+    <button class="mobile-btn" data-target="quotes" onclick="goToPage('quotes')">
+      <span class="m-icon">🌷</span>
+      <span>Quotes</span>
+    </button>
+    <button class="mobile-btn" data-target="wishes" onclick="goToPage('wishes')">
+      <span class="m-icon">✨</span>
+      <span>Wishes</span>
+    </button>
+    <button class="mobile-btn" data-target="letter" onclick="goToPage('letter')">
+      <span class="m-icon">💌</span>
+      <span>Note</span>
+    </button>
+  </nav>
+
+  <!-- MAIN PAGE STAGE -->
+  <main class="stage">
+
+    <!-- =====================================
+         PAGE 1: BIRTHDAY WELCOME
+    ===================================== -->
+    <section id="page-welcome" class="page active visible">
+      <div class="soft-card welcome-card reveal">
+        <div class="cake-circle">🎂</div>
+
+        <div class="badge">🌸 Happy Birthday</div>
+
+        <h1 class="hero-heading">
+          Happy Birthday,<br />
+          <span>Pooja Miss</span> ✨
+        </h1>
+
+        <div class="typewriter-pill" aria-live="polite">
+          <span id="heroTypewriter"></span><span class="cursor"></span>
+        </div>
+
+        <p class="welcome-text">
+          A simple little birthday page made just to wish you happiness, peace,
+          and all the good things waiting ahead in your new year.
+        </p>
+
+        <div>
+          <div class="gift-trigger" onclick="openGiftPopup()" role="button" tabindex="0">
+            <span class="gift-icon">🎁</span>
+            <div class="gift-copy">
+              <strong>A Small Birthday Gift for You</strong>
+              <small>Tap here to open your wish</small>
+            </div>
+          </div>
+        </div>
+
+        <div class="welcome-actions">
+          <button class="btn btn-primary" onclick="goToPage('quotes')">
+            Read Birthday Quotes →
+          </button>
+        </div>
+      </div>
+    </section>
+
+    <!-- =====================================
+         PAGE 2: THOUGHTFUL QUOTES
+    ===================================== -->
+    <section id="page-quotes" class="page">
+      <div class="page-head reveal">
+        <div class="badge">🌷 Beautiful Quotes</div>
+        <h2 class="page-title">Little Words for <span>Pooja Miss</span></h2>
+        <p class="page-sub">
+          Tap any quote card below to open a warm birthday wish made to go with it.
+        </p>
+      </div>
+
+      <div class="quotes-grid reveal">
+        <article class="soft-card clickable quote-card tint-pink" onclick="openQuotePopup(0)">
+          <div>
+            <div class="quote-mark">“</div>
+            <p class="quote-text">
+              May your coming year bring gentle mornings, genuine smiles, and everything you quietly hope for.
+            </p>
+          </div>
+          <div class="quote-footer">
+            <span>New Beginnings</span>
+            <span>Tap to read →</span>
+          </div>
+        </article>
+
+        <article class="soft-card clickable quote-card tint-lav" onclick="openQuotePopup(1)">
+          <div>
+            <div class="quote-mark">“</div>
+            <p class="quote-text">
+              Count your life by smiles, not tears. Count your age by happy memories, not just years.
+            </p>
+          </div>
+          <div class="quote-footer">
+            <span>Happy Memories</span>
+            <span>Tap to read →</span>
+          </div>
+        </article>
+
+        <article class="soft-card clickable quote-card tint-peach" onclick="openQuotePopup(2)">
+          <div>
+            <div class="quote-mark">“</div>
+            <p class="quote-text">
+              The best chapters are often the ones you haven't even reached yet. Keep blooming at your own pace.
+            </p>
+          </div>
+          <div class="quote-footer">
+            <span>Bright Future</span>
+            <span>Tap to read →</span>
+          </div>
+        </article>
+
+        <article class="soft-card clickable quote-card tint-pink" onclick="openQuotePopup(3)">
+          <div>
+            <div class="quote-mark">“</div>
+            <p class="quote-text">
+              Good friends are like quiet stars — you don't always see them every second, but they always brighten your sky.
+            </p>
+          </div>
+          <div class="quote-footer">
+            <span>Friendship</span>
+            <span>Tap to read →</span>
+          </div>
+        </article>
+      </div>
+
+      <div class="soft-card random-wish-bar reveal">
+        <p style="font-weight: 600; color: var(--text-main);">
+          Want one more little birthday quote for today?
+        </p>
+        <button class="btn btn-soft" onclick="openRandomQuote()">
+          ✨ Open a Random Birthday Quote
+        </button>
+      </div>
+
+      <div class="pager reveal">
+        <button class="btn btn-soft" onclick="goToPage('welcome')">← Back</button>
+        <button class="btn btn-primary" onclick="goToPage('wishes')">Next: Wishes &amp; Notes →</button>
+      </div>
+    </section>
+
+    <!-- =====================================
+         PAGE 3: BIRTHDAY WISHES & LITTLE NOTES
+    ===================================== -->
+    <section id="page-wishes" class="page">
+      <div class="page-head reveal">
+        <div class="badge">✨ Wishes &amp; Little Notes</div>
+        <h2 class="page-title">Birthday Wishes for <span>Pooja Miss</span></h2>
+        <p class="page-sub">
+          Tap each little card to open a birthday wish, then blow out the candles below!
+        </p>
+      </div>
+
+      <div class="notes-grid reveal">
+        <div class="soft-card clickable note-envelope" id="note-0" onclick="openWishCard(0)">
+          <span class="note-status">✓ Opened</span>
+          <div class="env-icon">🌸</div>
+          <h3>For Your Happiness</h3>
+          <p>Tap to open this birthday wish</p>
+        </div>
+
+        <div class="soft-card clickable note-envelope" id="note-1" onclick="openWishCard(1)">
+          <span class="note-status">✓ Opened</span>
+          <div class="env-icon">🌟</div>
+          <h3>For Your Dreams</h3>
+          <p>Tap to open this birthday wish</p>
+        </div>
+
+        <div class="soft-card clickable note-envelope" id="note-2" onclick="openWishCard(2)">
+          <span class="note-status">✓ Opened</span>
+          <div class="env-icon">🌷</div>
+          <h3>For Peace &amp; Strength</h3>
+          <p>Tap to open this birthday wish</p>
+        </div>
+
+        <div class="soft-card clickable note-envelope" id="note-3" onclick="openWishCard(3)">
+          <span class="note-status">✓ Opened</span>
+          <div class="env-icon">💐</div>
+          <h3>For Being a Great Friend</h3>
+          <p>Tap to open this birthday wish</p>
+        </div>
+      </div>
+
+      <!-- Make a Wish Candle Section -->
+      <div class="soft-card candle-card reveal">
+        <h3 style="font-family: var(--font-display); font-size: 1.65rem; margin-bottom: 4px;">
+          Make a Birthday Wish, Pooja Miss 🎂
+        </h3>
+        <p style="font-size: 0.92rem; color: var(--text-soft);">
+          Close your eyes for a second, think of a wish, and tap the button below.
+        </p>
+
+        <div class="candles-row" id="candlesRow">
+          <span class="candle-item">🕯️</span>
+          <span class="candle-item">🕯️</span>
+          <span class="candle-item">🕯️</span>
+        </div>
+
+        <button class="btn btn-primary" id="blowBtn" onclick="blowCandles()">
+          ✨ Blow Out the Candles
+        </button>
+      </div>
+
+      <div class="pager reveal">
+        <button class="btn btn-soft" onclick="goToPage('quotes')">← Quotes</button>
+        <button class="btn btn-primary" onclick="goToPage('letter')">Next: Birthday Note →</button>
+      </div>
+    </section>
+
+    <!-- =====================================
+         PAGE 4: FINAL BIRTHDAY NOTE
+    ===================================== -->
+    <section id="page-letter" class="page">
+      <div class="page-head reveal">
+        <div class="badge">💌 A Little Note</div>
+        <h2 class="page-title">Just One Last Wish for <span>Pooja Miss</span></h2>
+        <p class="page-sub">
+          Tap the envelope below to read the birthday note.
+        </p>
+      </div>
+
+      <div class="letter-shell reveal">
+        <!-- Sealed Envelope -->
+        <div class="soft-card clickable sealed-box" id="sealedBox" onclick="openFinalLetter()">
+          <div class="seal-circle">💌</div>
+          <h3 style="font-family: var(--font-display); font-size: 1.7rem; margin-bottom: 6px;">
+            Tap to Open Your Birthday Note
+          </h3>
+          <p style="color: var(--text-soft); font-size: 0.94rem; margin-bottom: 18px;">
+            A simple, genuine birthday wish from a friend.
+          </p>
+          <button class="btn btn-primary" type="button">Open Note ✨</button>
+        </div>
+
+        <!-- Opened Letter -->
+        <div class="paper-letter" id="paperLetter">
+          <div class="paper-top">
+            <div class="paper-salutation">Dear Pooja Miss,</div>
+            <div class="paper-date">🌸 Happy Birthday</div>
+          </div>
+
+          <div class="letter-text" id="letterTypewriter"></div>
+
+          <div class="paper-actions">
+            <button class="btn btn-soft" style="padding: 9px 18px; font-size: 0.86rem;" onclick="replayLetter()">
+              ↺ Replay Note
+            </button>
+            <button class="btn btn-primary" style="padding: 9px 18px; font-size: 0.86rem;" onclick="celebrateSoft()">
+              🌸 Celebrate Again
+            </button>
+          </div>
+        </div>
+      </div>
+
+      <div class="pager reveal">
+        <button class="btn btn-soft" onclick="goToPage('wishes')">← Wishes</button>
+        <button class="btn btn-soft" onclick="goToPage('welcome')">↺ Back to Start</button>
+      </div>
+    </section>
+
+  </main>
+
+  <!-- REUSABLE SWEET POP-UP MODAL -->
+  <div class="modal-backdrop" id="modalBackdrop" role="dialog" aria-modal="true" onclick="closeOnBackdrop(event)">
+    <div class="modal-card">
+      <button class="modal-close" onclick="closeModal()" aria-label="Close">✕</button>
+      <div class="modal-icon" id="modalIcon">🌸</div>
+      <h3 class="modal-title" id="modalTitle">Happy Birthday!</h3>
+      <p class="modal-msg" id="modalMsg"></p>
+      <button class="btn btn-primary" id="modalBtn" onclick="closeModal()">Thank You ✨</button>
+    </div>
+  </div>
+
+  <script>
+    /* =========================================
+       1. SMOOTH PAGE TRANSITIONS
+    ========================================= */
+    let currentPage = 'welcome';
+    let isSwitching = false;
+    const pageOrder = ['welcome', 'quotes', 'wishes', 'letter'];
+
+    function goToPage(target) {
+      if (target === currentPage || isSwitching) return;
+      isSwitching = true;
+
+      const oldPage = document.getElementById('page-' + currentPage);
+      const newPage = document.getElementById('page-' + target);
+
+      document.querySelectorAll('.nav-tab, .mobile-btn').forEach(btn => {
+        btn.classList.toggle('active', btn.dataset.target === target);
+      });
+
+      oldPage.classList.remove('visible');
+      oldPage.classList.add('leaving');
+
+      setTimeout(() => {
+        oldPage.classList.remove('active', 'leaving');
+        newPage.classList.add('active');
+        window.scrollTo({ top: 0, behavior: 'smooth' });
+
+        requestAnimationFrame(() => {
+          requestAnimationFrame(() => {
+            newPage.classList.add('visible');
+            currentPage = target;
+            isSwitching = false;
+          });
+        });
+      }, 320);
+    }
+
+    document.addEventListener('keydown', (e) => {
+      if (document.getElementById('modalBackdrop').classList.contains('open')) {
+        if (e.key === 'Escape') closeModal();
+        return;
+      }
+      const idx = pageOrder.indexOf(currentPage);
+      if (e.key === 'ArrowRight' && idx < pageOrder.length - 1) goToPage(pageOrder[idx + 1]);
+      if (e.key === 'ArrowLeft' && idx > 0) goToPage(pageOrder[idx - 1]);
+    });
+
+    /* =========================================
+       2. HERO TYPEWRITER ANIMATION
+    ========================================= */
+    const heroLines = [
+      'Wishing you a very Happy Birthday, Pooja Miss 🌸',
+      'May your day be full of warm smiles and joy ✨',
+      'Wishing you success, peace, and bright days ahead 🌷',
+      'Have a truly wonderful year ahead 🎂'
+    ];
+
+    let lineIdx = 0;
+    let charIdx = 0;
+    let deleting = false;
+    const heroEl = document.getElementById('heroTypewriter');
+
+    function typeHero() {
+      const line = heroLines[lineIdx];
+      if (!deleting) {
+        heroEl.textContent = line.slice(0, charIdx + 1);
+        charIdx++;
+        if (charIdx === line.length) {
+          deleting = true;
+          setTimeout(typeHero, 1900);
+          return;
+        }
+        setTimeout(typeHero, 58);
+      } else {
+        heroEl.textContent = line.slice(0, charIdx - 1);
+        charIdx--;
+        if (charIdx === 0) {
+          deleting = false;
+          lineIdx = (lineIdx + 1) % heroLines.length;
+          setTimeout(typeHero, 380);
+          return;
+        }
+        setTimeout(typeHero, 30);
+      }
+    }
+    typeHero();
+
+    /* =========================================
+       3. POP-UP MODAL SYSTEM
+    ========================================= */
+    function openModal({ icon = '🌸', title, msg, btnText = 'Lovely ✨', confetti = false }) {
+      document.getElementById('modalIcon').textContent = icon;
+      document.getElementById('modalTitle').textContent = title;
+      document.getElementById('modalMsg').textContent = msg;
+      document.getElementById('modalBtn').textContent = btnText;
+      document.getElementById('modalBackdrop').classList.add('open');
+      if (confetti) launchConfetti(60);
+    }
+
+    function closeModal() {
+      document.getElementById('modalBackdrop').classList.remove('open');
+    }
+
+    function closeOnBackdrop(e) {
+      if (e.target.id === 'modalBackdrop') closeModal();
+    }
+
+    /* =========================================
+       4. PAGE 1, 2 & 3 POP-UPS
+    ========================================= */
+    function openGiftPopup() {
+      openModal({
+        icon: '🎁',
+        title: 'A Little Wish for Pooja Miss',
+        msg: 'My gift isn’t something wrapped in paper — it’s simply a sincere wish for your happiness, your good health, your dreams, and all the wonderful things waiting ahead of you. Happy Birthday!',
+        btnText: 'Keep Smiling 🌸',
+        confetti: true
+      });
+    }
+
+    const quotePopups = [
+      {
+        icon: '🌅',
+        title: 'Wishing You Bright Days',
+        msg: 'Every new birthday is a fresh start. Hope this new year of your life brings you calm mornings, joyful moments, and reasons to smile every single day, Pooja Miss.'
+      },
+      {
+        icon: '🌷',
+        title: 'Here’s to Good Memories',
+        msg: 'May this year give you unforgettable memories, lots of laughter with people who care about you, and moments you will always look back on happily.'
+      },
+      {
+        icon: '✨',
+        title: 'Your Best Chapter Yet',
+        msg: 'There is no rush in life — everything good happens in its own time. Keep moving forward with confidence, Pooja Miss. Great things are ahead of you.'
+      },
+      {
+        icon: '🌟',
+        title: 'Grateful for Your Friendship',
+        msg: 'Having a kind, genuine friend like you makes days much nicer. Wishing you nothing but the very best on your birthday and always.'
+      }
+    ];
+
+    function openQuotePopup(i) {
+      openModal({ ...quotePopups[i], btnText: 'Close ✨' });
+    }
+
+    const extraQuotes = [
+      '“May your birthday be as warm, kind, and bright as the smile you bring to the people around you.”',
+      '“A birthday is a gentle reminder of how far you have come and how much beauty still lies ahead.”',
+      '“Wishing you a year filled with little joys, big achievements, and peaceful hearts.”',
+      '“Stay true to yourself, keep dreaming big, and never forget how wonderful you are.”',
+      '“May every month ahead bring you a new reason to feel proud and happy.”'
+    ];
+    let lastQuote = -1;
+
+    function openRandomQuote() {
+      let i;
+      do { i = Math.floor(Math.random() * extraQuotes.length); } while (i === lastQuote);
+      lastQuote = i;
+      openModal({
+        icon: '🌼',
+        title: 'A Quote for Today',
+        msg: extraQuotes[i],
+        btnText: 'So Sweet 🌸',
+        confetti: true
+      });
+    }
+
+    const wishCards = [
+      {
+        icon: '🌸',
+        title: 'For Your Happiness',
+        msg: 'Wishing you endless moments that make your heart light and your face smile. You deserve days filled with warmth, laughter, and genuine joy, Pooja Miss.'
+      },
+      {
+        icon: '🌟',
+        title: 'For Your Dreams',
+        msg: 'Whatever goals and dreams you are working towards, I truly hope every single one of them comes true step by step. You have everything it takes to achieve great things.'
+      },
+      {
+        icon: '🌷',
+        title: 'For Peace & Strength',
+        msg: 'May your days stay peaceful, your mind stay calm, and may you always have the strength and positivity to overcome any challenge easily.'
+      },
+      {
+        icon: '💐',
+        title: 'Thank You, Pooja Miss',
+        msg: 'Thank you for being such a nice, respectful, and thoughtful friend. Really glad to know you — hope your birthday feels as special as you are!'
+      }
+    ];
+
+    function openWishCard(index) {
+      document.getElementById('note-' + index).classList.add('opened');
+      openModal({
+        ...wishCards[index],
+        btnText: 'Warm Wishes ✨',
+        confetti: index === 3
+      });
+    }
+
+    let candlesBlown = false;
+    function blowCandles() {
+      const candles = document.querySelectorAll('.candle-item');
+      const btn = document.getElementById('blowBtn');
+
+      if (!candlesBlown) {
+        candles.forEach(c => {
+          c.textContent = '✨';
+          c.classList.add('blown');
+        });
+        btn.textContent = '🕯️ Relight Candles';
+        candlesBlown = true;
+        openModal({
+          icon: '🎉',
+          title: 'Happy Birthday, Pooja Miss!',
+          msg: 'May the wish you just made come true in the most beautiful way. Wishing you a truly joyful and blessed birthday!',
+          btnText: 'Thank You 🎂',
+          confetti: true
+        });
+      } else {
+        candles.forEach(c => {
+          c.textContent = '🕯️';
+          c.classList.remove('blown');
+        });
+        btn.textContent = '✨ Blow Out the Candles';
+        candlesBlown = false;
+      }
+    }
+
+    /* =========================================
+       5. PAGE 4: FINAL TYPEWRITER BIRTHDAY NOTE
+    ========================================= */
+    const finalNote =
+      "Wishing you a very, very Happy Birthday! 🌸\n\n" +
+      "I wanted to make something simple and thoughtful just to wish you a wonderful day. May this new year of your life bring you lots of happiness, good health, peace of mind, and success in everything you wish to achieve.\n\n" +
+      "Thank you for always being such a kind and wonderful friend. Stay happy, keep smiling, and enjoy your special day to the fullest.\n\n" +
+      "Have the happiest birthday, Pooja Miss! ✨\n\n" +
+      "— Best wishes from your friend 🌷";
+
+    let letterInterval = null;
+
+    function openFinalLetter() {
+      document.getElementById('sealedBox').style.display = 'none';
+      document.getElementById('paperLetter').classList.add('show');
+      launchConfetti(55);
+      typeFinalNote();
+    }
+
+    function typeFinalNote() {
+      clearInterval(letterInterval);
+      const box = document.getElementById('letterTypewriter');
+      box.textContent = '';
+      let i = 0;
+      letterInterval = setInterval(() => {
+        box.textContent += finalNote.charAt(i);
+        i++;
+        if (i >= finalNote.length) clearInterval(letterInterval);
+      }, 26);
+    }
+
+    function replayLetter() {
+      typeFinalNote();
+    }
+
+    function celebrateSoft() {
+      launchConfetti(85);
+    }
+
+    /* =========================================
+       6. GENTLE FLOATING PETALS & PASTEL CONFETTI
+    ========================================= */
+    const canvas = document.getElementById('fxCanvas');
+    const ctx = canvas.getContext('2d');
+    let W = window.innerWidth;
+    let H = window.innerHeight;
+
+    function resize() {
+      W = canvas.width = window.innerWidth;
+      H = canvas.height = window.innerHeight;
+    }
+    window.addEventListener('resize', resize);
+    resize();
+
+    const petalColors = ['rgba(244, 166, 198, 0.45)', 'rgba(205, 180, 255, 0.45)', 'rgba(255, 200, 175, 0.45)'];
+    const petals = Array.from({ length: 22 }, () => ({
+      x: Math.random() * W,
+      y: Math.random() * H,
+      r: Math.random() * 5 + 3,
+      vx: (Math.random() - 0.5) * 0.45,
+      vy: Math.random() * 0.5 + 0.25,
+      rot: Math.random() * Math.PI * 2,
+      vrot: (Math.random() - 0.5) * 0.02,
+      color: petalColors[Math.floor(Math.random() * petalColors.length)]
+    }));
+
+    let confetti = [];
+    const confettiColors = ['#f472b6', '#c084fc', '#fbbf24', '#fda4af', '#93c5fd', '#f9a8d4'];
+
+    function launchConfetti(count = 60) {
+      const cx = W / 2;
+      const cy = H * 0.42;
+      for (let i = 0; i < count; i++) {
+        const angle = Math.random() * Math.PI * 2;
+        const speed = Math.random() * 6 + 2.5;
+        confetti.push({
+          x: cx + (Math.random() - 0.5) * 60,
+          y: cy + (Math.random() - 0.5) * 30,
+          vx: Math.cos(angle) * speed,
+          vy: Math.sin(angle) * speed - 3.5,
+          size: Math.random() * 6 + 4,
+          color: confettiColors[Math.floor(Math.random() * confettiColors.length)],
+          rot: Math.random() * 360,
+          vrot: (Math.random() - 0.5) * 8,
+          life: 1
+        });
+      }
+    }
+
+    function loop() {
+      ctx.clearRect(0, 0, W, H);
+
+      // Gentle floating pastel petals
+      for (const p of petals) {
+        p.x += p.vx;
+        p.y += p.vy;
+        p.rot += p.vrot;
+        if (p.y > H + 15) { p.y = -15; p.x = Math.random() * W; }
+        if (p.x < -15) p.x = W + 15;
+        if (p.x > W + 15) p.x = -15;
+
+        ctx.save();
+        ctx.translate(p.x, p.y);
+        ctx.rotate(p.rot);
+        ctx.fillStyle = p.color;
+        ctx.beginPath();
+        ctx.ellipse(0, 0, p.r, p.r * 0.55, 0, 0, Math.PI * 2);
+        ctx.fill();
+        ctx.restore();
+      }
+
+      // Soft pastel confetti
+      for (let i = confetti.length - 1; i >= 0; i--) {
+        const c = confetti[i];
+        c.x += c.vx;
+        c.y += c.vy;
+        c.vy += 0.14;
+        c.vx *= 0.99;
+        c.rot += c.vrot;
+        c.life -= 0.012;
+        if (c.life <= 0 || c.y > H + 20) {
+          confetti.splice(i, 1);
+          continue;
+        }
+        ctx.save();
+        ctx.translate(c.x, c.y);
+        ctx.rotate((c.rot * Math.PI) / 180);
+        ctx.globalAlpha = Math.max(c.life, 0);
+        ctx.fillStyle = c.color;
+        ctx.fillRect(-c.size / 2, -c.size / 2, c.size, c.size * 0.65);
+        ctx.restore();
+      }
+
+      requestAnimationFrame(loop);
+    }
+    loop();
+  </script>
+</body>
+</html>
